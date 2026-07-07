@@ -24,7 +24,6 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
-  SidebarSeparator,
 } from '@/components/ui/sidebar';
 import { useI18n } from '@/context/I18nContext';
 import { cn } from '@/lib/utils';
@@ -71,7 +70,7 @@ function NavGroup({
                 className={cn(
                   'transition-colors',
                   isActive &&
-                    'bg-primary/10 text-primary hover:bg-primary/15 hover:text-primary font-medium',
+                    'bg-primary/15 text-primary hover:bg-primary/20 hover:text-primary font-medium',
                 )}
                 render={<Link href={item.href} />}
               >
@@ -131,8 +130,6 @@ export function AdminSidebar() {
           pathname={pathname}
           t={t}
         />
-
-        <SidebarSeparator />
 
         <NavGroup
           items={NAV_PRODUCTS}

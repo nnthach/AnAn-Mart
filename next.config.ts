@@ -4,6 +4,15 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   // Bật standalone output để Docker image gọn (dùng cho deploy production).
   output: 'standalone',
+
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+      },
+    ],
+  },
 };
 
 export default nextConfig;
