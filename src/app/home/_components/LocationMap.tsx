@@ -4,6 +4,8 @@ import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useEffect, useRef } from 'react';
 
+import { useI18n } from '@/context/I18nContext';
+
 const STORE_NAME = 'An An Mart';
 const STORE_ADDRESS_LINES = ['191 Lý Thường Kiệt,', 'Hội An, Quảng Nam, Vietnam'];
 const STORE_COORDINATES: [number, number] = [
@@ -15,6 +17,7 @@ const GOOGLE_MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${STORE
 const MAPBOX_ACCESS_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
 
 export default function LocationMap() {
+  const { t } = useI18n();
   const mapContainer = useRef<HTMLDivElement | null>(null);
   const map = useRef<mapboxgl.Map | null>(null);
 
@@ -43,7 +46,7 @@ export default function LocationMap() {
   if (!MAPBOX_ACCESS_TOKEN) {
     return (
       <div className="flex h-125 w-full items-center justify-center bg-gray-100 text-sm text-gray-500">
-        Not found
+        {t('homepage.storeGallery.missingMapToken')}
       </div>
     );
   }
@@ -67,7 +70,7 @@ export default function LocationMap() {
           rel="noopener noreferrer"
           className="mt-2 inline-block text-sm text-blue-600 hover:underline"
         >
-          View larger map
+          {t('homepage.storeGallery.viewLargerMap')}
         </a>
       </div>
     </div>

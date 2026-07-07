@@ -1,15 +1,20 @@
+'use client';
+
 import { Headset, MapPin, ShieldCheck, ShoppingBag, Truck } from 'lucide-react';
 import Image from 'next/image';
 
 import { Button } from '@/components/ui/button';
+import { useI18n } from '@/context/I18nContext';
 
 const TRUST_BADGES = [
-  { icon: Truck, title: 'Fast Delivery', subtitle: 'In Hoi An Area' },
-  { icon: ShieldCheck, title: 'Imported Products', subtitle: '100% Genuine' },
-  { icon: Headset, title: 'Support 24/7', subtitle: 'Support Any Time' },
-];
+  { key: 'fastDelivery', icon: Truck },
+  { key: 'importedProducts', icon: ShieldCheck },
+  { key: 'support', icon: Headset },
+] as const;
 
 export function HeroSection() {
+  const { t } = useI18n();
+
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden">
       <div className="absolute inset-0">
@@ -26,24 +31,23 @@ export function HeroSection() {
 
       <div className="relative z-10 mx-auto max-w-2xl px-4 py-24 text-center md:px-8">
         <p className="font-heading text-3xl leading-tight font-medium text-white italic sm:text-4xl">
-          Your Premium
+          {t('homepage.hero.eyebrow')}
         </p>
         <h1 className="font-heading text-primary text-4xl leading-tight font-bold sm:text-5xl">
-          Grocery &amp; Wine
+          {t('homepage.hero.titleHighlight')}
         </h1>
         <p className="font-heading text-3xl leading-tight font-medium text-white sm:text-4xl">
-          Destination in Hoi An
+          {t('homepage.hero.subtitle')}
         </p>
 
         <p className="mx-auto mt-5 max-w-md text-sm leading-relaxed text-white/85 sm:text-base">
-          Discover imported wines, premium spirits, gourmet snacks, coffee, souvenirs, and daily
-          essentials — all in one trusted local store.
+          {t('homepage.hero.description')}
         </p>
 
         <div className="mt-7 flex flex-wrap justify-center gap-3">
           <Button size="lg" className="gap-2 rounded-full px-6">
             <ShoppingBag className="size-4" />
-            Shop Now
+            {t('homepage.hero.shopNow')}
           </Button>
           <Button
             size="lg"
@@ -51,16 +55,20 @@ export function HeroSection() {
             className="border-primary text-primary hover:bg-accent gap-2 rounded-full bg-white px-6"
           >
             <MapPin className="size-4" />
-            Visit Our Store
+            {t('homepage.hero.visitStore')}
           </Button>
         </div>
 
         <dl className="mt-10 grid grid-cols-3 gap-4">
-          {TRUST_BADGES.map(({ icon: Icon, title, subtitle }) => (
-            <div key={title} className="flex flex-col items-center gap-1">
+          {TRUST_BADGES.map(({ key, icon: Icon }) => (
+            <div key={key} className="flex flex-col items-center gap-1">
               <Icon className="size-5 text-red-400" />
-              <dt className="text-xs font-semibold text-white sm:text-sm">{title}</dt>
-              <dd className="text-[11px] text-white/70 sm:text-xs">{subtitle}</dd>
+              <dt className="text-xs font-semibold text-white sm:text-sm">
+                {t(`homepage.hero.trustBadges.${key}.title`)}
+              </dt>
+              <dd className="text-[11px] text-white/70 sm:text-xs">
+                {t(`homepage.hero.trustBadges.${key}.subtitle`)}
+              </dd>
             </div>
           ))}
         </dl>

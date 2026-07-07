@@ -1,23 +1,32 @@
 'use client';
 
-import { LogIn, Menu, X } from 'lucide-react';
+import { LogIn, Menu } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 import LanguageToggle from '@/components/features/LanguageToggle';
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
+import { useI18n } from '@/context/I18nContext';
 import { cn } from '@/lib/utils';
 
 const NAV_LINKS = [
-  { label: 'Home', href: '/', active: true },
-  { label: 'Shop', href: '/shop' },
-  { label: 'About Us', href: '/about' },
-  { label: 'Delivery', href: '/delivery' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'Contact', href: '/contact' },
-];
+  { key: 'home', href: '/', active: true },
+  { key: 'shop', href: '/shop', active: false },
+  { key: 'aboutUs', href: '/about', active: false },
+  { key: 'contact', href: '/contact', active: false },
+] as const;
 
 export default function Header() {
+  const { t } = useI18n();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -38,39 +47,39 @@ export default function Header() {
       )}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 md:px-8">
-        <Link href="/" className="flex shrink-0 items-center gap-2">
-          <span className="border-primary/15 relative flex size-12 items-center justify-center overflow-hidden rounded-full border bg-white shadow-sm md:size-14">
+        <Link href="/" className="flex w-[200px] shrink-0 items-center gap-2">
+          <span className="border-primary/15 relative flex size-10 items-center justify-center overflow-hidden rounded-full border bg-white shadow-sm md:size-12">
             <Image
               src="/images/logo.png"
               alt="An An Mart"
-              width={100}
-              height={100}
+              width={80}
+              height={80}
               priority
               className="size-full object-cover"
             />
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-7 text-sm font-medium md:flex">
+        <nav className="hidden items-center gap-7 text-xs font-medium md:flex">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               className={cn(
                 'hover:text-primary pb-1 tracking-wide uppercase transition-colors',
-                link.active
+                link?.active
                   ? 'text-primary border-primary border-b-2'
                   : isScrolled
                     ? 'text-gray-700'
                     : 'text-white',
               )}
             >
-              {link.label}
+              {t(`header.nav.${link.key}`)}
             </Link>
           ))}
         </nav>
 
-        <div className="hidden items-center gap-3 md:flex">
+        <div className="flex hidden w-[200px] items-center justify-end gap-3 md:flex">
           <LanguageToggle isScrolled={isScrolled} />
 
           <Link
@@ -83,40 +92,67 @@ export default function Header() {
             )}
           >
             <LogIn className="size-4" />
-            Sign In
+            {t('header.signIn')}
           </Link>
         </div>
 
-        <button
-          type="button"
-          aria-label={isMenuOpen ? 'Đóng menu' : 'Mở menu'}
-          className={cn(
-            'rounded-lg p-2 transition-colors md:hidden',
-            isScrolled ? 'text-gray-700 hover:bg-gray-100' : 'text-white hover:bg-white/10',
-          )}
-          onClick={() => setIsMenuOpen((open) => !open)}
-        >
-          {isMenuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
-        </button>
-      </div>
+        <div className="flex items-center gap-2 md:hidden">
+          <LanguageToggle isScrolled={isScrolled} />
 
-      {isMenuOpen ? (
-        <nav className="border-border flex flex-col gap-3 border-t bg-white px-4 py-4 md:hidden">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
+          <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
+            <SheetTrigger
+              aria-label={t('header.menu.open')}
               className={cn(
-                'text-sm font-medium tracking-wide uppercase',
-                link.active ? 'text-primary' : 'text-gray-700',
+                'rounded-lg p-2 transition-colors',
+                isScrolled ? 'text-gray-700 hover:bg-gray-100' : 'text-white hover:bg-white/10',
               )}
-              onClick={() => setIsMenuOpen(false)}
             >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-      ) : null}
+              <Menu className="size-5" />
+            </SheetTrigger>
+
+            <SheetContent side="right">
+              <SheetHeader>
+                <SheetTitle>An An Mart</SheetTitle>
+              </SheetHeader>
+
+              <nav className="flex flex-col gap-3 px-4">
+                {NAV_LINKS.map((link) => (
+                  <SheetClose
+                    key={link.href}
+                    nativeButton={false}
+                    render={
+                      <Link
+                        href={link.href}
+                        className={cn(
+                          'text-sm font-medium tracking-wide uppercase',
+                          link.active ? 'text-primary' : 'text-gray-700',
+                        )}
+                      />
+                    }
+                  >
+                    {t(`header.nav.${link.key}`)}
+                  </SheetClose>
+                ))}
+              </nav>
+
+              <SheetFooter>
+                <SheetClose
+                  nativeButton={false}
+                  render={
+                    <Link
+                      href="/sign-in"
+                      className="border-primary text-primary hover:bg-primary hover:text-primary-foreground flex items-center justify-center gap-1.5 rounded-full border px-4 py-2 text-sm font-medium tracking-wide transition-colors"
+                    />
+                  }
+                >
+                  <LogIn className="size-4" />
+                  {t('header.signIn')}
+                </SheetClose>
+              </SheetFooter>
+            </SheetContent>
+          </Sheet>
+        </div>
+      </div>
     </header>
   );
 }

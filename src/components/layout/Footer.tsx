@@ -1,25 +1,29 @@
+'use client';
+
 import { Clock, Mail, MapPin, Phone } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { useI18n } from '@/context/I18nContext';
+
 const QUICK_LINKS = [
-  { label: 'Shop', href: '/shop' },
-  { label: 'About Us', href: '/about' },
-  { label: 'Delivery', href: '/delivery' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'Contact', href: '/contact' },
-  { label: 'Terms & Conditions', href: '/terms' },
-];
+  { key: 'shop', href: '/shop' },
+  { key: 'aboutUs', href: '/about' },
+  { key: 'delivery', href: '/delivery' },
+  { key: 'blog', href: '/blog' },
+  { key: 'contact', href: '/contact' },
+  { key: 'terms', href: '/terms' },
+] as const;
 
 const POPULAR_CATEGORIES = [
-  'Wine',
-  'Whisky',
-  'Craft Beer',
-  'Snacks',
-  'Coffee',
-  'Souvenirs',
-  'Travel Essentials',
-];
+  'wine',
+  'whisky',
+  'craftBeer',
+  'snacks',
+  'coffee',
+  'souvenirs',
+  'travelEssentials',
+] as const;
 
 const SOCIAL_LINKS = [
   {
@@ -40,6 +44,8 @@ const SOCIAL_LINKS = [
 ];
 
 export default function Footer() {
+  const { t } = useI18n();
+
   return (
     <footer className="border-border border-t bg-gray-50">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:grid-cols-2 md:px-8 lg:grid-cols-5">
@@ -55,10 +61,7 @@ export default function Footer() {
               />
             </span>
           </div>
-          <p className="mt-4 max-w-xs text-sm leading-relaxed text-gray-600">
-            Your trusted local shop in Hoi An for premium wines, spirits, groceries, snacks, and
-            daily essentials.
-          </p>
+          <p className="mt-4 max-w-xs text-sm leading-relaxed text-gray-600">{t('footer.tagline')}</p>
           <div className="mt-4 flex items-center gap-3">
             {SOCIAL_LINKS.map(({ label, href, path }) => (
               <a
@@ -79,7 +82,7 @@ export default function Footer() {
 
         <div>
           <h3 className="text-primary text-xs font-semibold tracking-widest uppercase">
-            Contact Us
+            {t('footer.contactTitle')}
           </h3>
           <ul className="mt-4 space-y-3 text-sm text-gray-600">
             <li className="flex items-start gap-2">
@@ -88,7 +91,7 @@ export default function Footer() {
             </li>
             <li className="flex items-start gap-2">
               <Clock className="text-primary mt-0.5 size-4 shrink-0" />
-              Open Daily 8:00 AM - 12:30 AM
+              {t('footer.openDaily')}
             </li>
             <li className="flex items-start gap-2">
               <Phone className="text-primary mt-0.5 size-4 shrink-0" />
@@ -101,38 +104,40 @@ export default function Footer() {
           </ul>
         </div>
 
-        <div>
-          <h3 className="text-primary text-xs font-semibold tracking-widest uppercase">
-            Quick Links
-          </h3>
-          <ul className="mt-4 space-y-2.5 text-sm text-gray-600">
-            {QUICK_LINKS.map((link) => (
-              <li key={link.href}>
-                <Link href={link.href} className="hover:text-primary transition-colors">
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <div className="grid grid-cols-2 gap-6 sm:contents">
+          <div>
+            <h3 className="text-primary text-xs font-semibold tracking-widest uppercase">
+              {t('footer.quickLinksTitle')}
+            </h3>
+            <ul className="mt-4 space-y-2.5 text-sm text-gray-600">
+              {QUICK_LINKS.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="hover:text-primary transition-colors">
+                    {t(`footer.quickLinks.${link.key}`)}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-        <div>
-          <h3 className="text-primary text-xs font-semibold tracking-widest uppercase">
-            Popular Categories
-          </h3>
-          <ul className="mt-4 space-y-2.5 text-sm text-gray-600">
-            {POPULAR_CATEGORIES.map((category) => (
-              <li key={category} className="hover:text-primary transition-colors">
-                {category}
-              </li>
-            ))}
-          </ul>
+          <div>
+            <h3 className="text-primary text-xs font-semibold tracking-widest uppercase">
+              {t('footer.popularCategoriesTitle')}
+            </h3>
+            <ul className="mt-4 space-y-2.5 text-sm text-gray-600">
+              {POPULAR_CATEGORIES.map((key) => (
+                <li key={key} className="hover:text-primary transition-colors">
+                  {t(`footer.popularCategories.${key}`)}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
 
       <div className="border-border border-t">
         <p className="mx-auto max-w-7xl px-4 py-5 text-center text-xs text-gray-500 md:px-8">
-          © {new Date().getFullYear()} An An Mart - Hoi An Alcohol Shop. All Rights Reserved.
+          © {new Date().getFullYear()} {t('footer.copyright')}
         </p>
       </div>
     </footer>
