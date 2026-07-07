@@ -46,7 +46,7 @@ export default function LocationMap() {
   if (!MAPBOX_ACCESS_TOKEN) {
     return (
       <div className="flex h-125 w-full items-center justify-center bg-gray-100 text-sm text-gray-500">
-        {t('homepage.storeGallery.missingMapToken')}
+        {t('locationMap.missingMapToken')}
       </div>
     );
   }
@@ -70,7 +70,7 @@ export default function LocationMap() {
           rel="noopener noreferrer"
           className="mt-2 inline-block text-sm text-blue-600 hover:underline"
         >
-          {t('homepage.storeGallery.viewLargerMap')}
+          {t('locationMap.viewLargerMap')}
         </a>
       </div>
     </div>

@@ -107,9 +107,37 @@ interface Translation {
     storeGallery: {
       visitOurStore: string;
       openDaily: string;
-      viewLargerMap: string;
-      missingMapToken: string;
     };
+  };
+  locationMap: {
+    viewLargerMap: string;
+    missingMapToken: string;
+  };
+  aboutPage: {
+    title: string;
+    tagline: string;
+    storyHeading: string;
+    storyParagraph: string;
+    stats: {
+      years: string;
+      products: string;
+      customers: string;
+    };
+    ctaTitle: string;
+    ctaButton: string;
+  };
+  contactPage: {
+    title: string;
+    tagline: string;
+    infoHeading: string;
+    formHeading: string;
+    nameLabel: string;
+    namePlaceholder: string;
+    emailLabel: string;
+    emailPlaceholder: string;
+    messageLabel: string;
+    messagePlaceholder: string;
+    submitButton: string;
   };
   shopPage: {
     title: string;
@@ -256,9 +284,38 @@ export const translations: Record<Locale, Translation> = {
       storeGallery: {
         visitOurStore: 'Visit Our Store',
         openDaily: 'Open Daily',
-        viewLargerMap: 'View larger map',
-        missingMapToken: 'Missing NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN — unable to display the map.',
       },
+    },
+    locationMap: {
+      viewLargerMap: 'View larger map',
+      missingMapToken: 'Missing NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN — unable to display the map.',
+    },
+    aboutPage: {
+      title: 'About An An Mart',
+      tagline: 'A trusted local shop in the heart of Hoi An since day one.',
+      storyHeading: 'Our Story',
+      storyParagraph:
+        "An An Mart started as a small family shop on Lý Thường Kiệt street, serving the Hoi An community with quality wines, spirits, and everyday essentials. Today we're proud to welcome both locals and travelers looking for a curated selection and honest service.",
+      stats: {
+        years: 'Years Serving Hoi An',
+        products: 'Products In Store',
+        customers: 'Happy Customers',
+      },
+      ctaTitle: 'Come Say Hello',
+      ctaButton: 'Get Directions',
+    },
+    contactPage: {
+      title: 'Contact Us',
+      tagline: "Questions, orders, or just want to say hi — we'd love to hear from you.",
+      infoHeading: 'Get In Touch',
+      formHeading: 'Send Us a Message',
+      nameLabel: 'Name',
+      namePlaceholder: 'Your name',
+      emailLabel: 'Email',
+      emailPlaceholder: 'you@example.com',
+      messageLabel: 'Message',
+      messagePlaceholder: 'How can we help?',
+      submitButton: 'Send Message',
     },
     shopPage: {
       title: 'Shop All Products',
@@ -410,9 +467,38 @@ export const translations: Record<Locale, Translation> = {
       storeGallery: {
         visitOurStore: 'Ghé Thăm Cửa Hàng',
         openDaily: 'Mở Cửa Hằng Ngày',
-        viewLargerMap: 'Xem bản đồ lớn hơn',
-        missingMapToken: 'Thiếu NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN — không thể hiển thị bản đồ.',
       },
+    },
+    locationMap: {
+      viewLargerMap: 'Xem bản đồ lớn hơn',
+      missingMapToken: 'Thiếu NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN — không thể hiển thị bản đồ.',
+    },
+    aboutPage: {
+      title: 'Về An An Mart',
+      tagline: 'Cửa hàng địa phương đáng tin cậy giữa lòng Hội An.',
+      storyHeading: 'Câu Chuyện Của Chúng Tôi',
+      storyParagraph:
+        'An An Mart bắt đầu là một cửa hàng gia đình nhỏ trên đường Lý Thường Kiệt, phục vụ cộng đồng Hội An với rượu vang, rượu mạnh và các nhu yếu phẩm chất lượng. Ngày nay, chúng tôi tự hào chào đón cả người dân địa phương và du khách tìm kiếm sản phẩm được tuyển chọn kỹ càng cùng dịch vụ tận tâm.',
+      stats: {
+        years: 'Năm Phục Vụ Hội An',
+        products: 'Sản Phẩm Trong Cửa Hàng',
+        customers: 'Khách Hàng Hài Lòng',
+      },
+      ctaTitle: 'Ghé Thăm Chúng Tôi',
+      ctaButton: 'Chỉ Đường',
+    },
+    contactPage: {
+      title: 'Liên Hệ',
+      tagline: 'Có câu hỏi, muốn đặt hàng, hay chỉ đơn giản là muốn chào hỏi — chúng tôi luôn sẵn lòng lắng nghe.',
+      infoHeading: 'Thông Tin Liên Hệ',
+      formHeading: 'Gửi Tin Nhắn Cho Chúng Tôi',
+      nameLabel: 'Họ Tên',
+      namePlaceholder: 'Họ tên của bạn',
+      emailLabel: 'Email',
+      emailPlaceholder: 'ban@example.com',
+      messageLabel: 'Lời Nhắn',
+      messagePlaceholder: 'Chúng tôi có thể giúp gì cho bạn?',
+      submitButton: 'Gửi Tin Nhắn',
     },
     shopPage: {
       title: 'Tất Cả Sản Phẩm',

@@ -3,9 +3,8 @@
 import { Clock, Mail, MapPin, Phone } from 'lucide-react';
 import Image from 'next/image';
 
+import LocationMap from '@/components/features/LocationMap';
 import { useI18n } from '@/context/I18nContext';
-
-import LocationMap from './LocationMap';
 
 export function StoreGallery() {
   const { t } = useI18n();
