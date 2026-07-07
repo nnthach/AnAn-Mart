@@ -7,9 +7,13 @@ const EnvSchema = z.object({
 
   // Public — lộ ra client (phải có tiền tố NEXT_PUBLIC_)
   NEXT_PUBLIC_SITE_URL: z.string().url().default('http://localhost:3000'),
+  NEXT_PUBLIC_SUPABASE_URL: z.string().url(),
+  NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: z.string().url(),
 
   // Server-side secret — thêm tại đây, ví dụ:
-  // DATABASE_URL: z.string().url(),
+  DATABASE_URL: z.string().url(),
+  SUPABASE_SECRET_KEY: z.string().url(),
+  SUPABASE_JWKS_URL: z.string().url(),
 });
 
 export const env = EnvSchema.parse(process.env);
