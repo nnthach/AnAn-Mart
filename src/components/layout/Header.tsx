@@ -3,6 +3,7 @@
 import { LogIn, Menu } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import LanguageToggle from '@/components/features/LanguageToggle';
@@ -19,14 +20,15 @@ import { useI18n } from '@/context/I18nContext';
 import { cn } from '@/lib/utils';
 
 const NAV_LINKS = [
-  { key: 'home', href: '/', active: true },
-  { key: 'shop', href: '/shop', active: false },
-  { key: 'aboutUs', href: '/about', active: false },
-  { key: 'contact', href: '/contact', active: false },
+  { key: 'home', href: '/' },
+  { key: 'shop', href: '/shop' },
+  { key: 'aboutUs', href: '/about' },
+  { key: 'contact', href: '/contact' },
 ] as const;
 
 export default function Header() {
   const { t } = useI18n();
+  const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -36,6 +38,9 @@ export default function Header() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const isLinkActive = (href: string) =>
+    href === '/' ? pathname === '/' : pathname.startsWith(href);
 
   return (
     <header
@@ -47,7 +52,7 @@ export default function Header() {
       )}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 md:px-8">
-        <Link href="/" className="flex w-[200px] shrink-0 items-center gap-2">
+        <Link href="/" className="flex w-[250px] shrink-0 items-center gap-2">
           <span className="border-primary/15 relative flex size-10 items-center justify-center overflow-hidden rounded-full border bg-white shadow-sm md:size-12">
             <Image
               src="/images/logo.png"
@@ -67,7 +72,7 @@ export default function Header() {
               href={link.href}
               className={cn(
                 'hover:text-primary pb-1 tracking-wide uppercase transition-colors',
-                link?.active
+                isLinkActive(link.href)
                   ? 'text-primary border-primary border-b-2'
                   : isScrolled
                     ? 'text-gray-700'
@@ -79,7 +84,7 @@ export default function Header() {
           ))}
         </nav>
 
-        <div className="flex hidden w-[200px] items-center justify-end gap-3 md:flex">
+        <div className="flex hidden w-[250px] items-center justify-end gap-3 md:flex">
           <LanguageToggle isScrolled={isScrolled} />
 
           <Link
@@ -125,7 +130,7 @@ export default function Header() {
                         href={link.href}
                         className={cn(
                           'text-sm font-medium tracking-wide uppercase',
-                          link.active ? 'text-primary' : 'text-gray-700',
+                          isLinkActive(link.href) ? 'text-primary' : 'text-gray-700',
                         )}
                       />
                     }

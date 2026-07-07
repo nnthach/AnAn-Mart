@@ -111,6 +111,26 @@ interface Translation {
       missingMapToken: string;
     };
   };
+  shopPage: {
+    title: string;
+    description: string;
+    searchPlaceholder: string;
+    filtersAll: string;
+    resultsSuffix: string;
+    addToCart: string;
+    empty: string;
+    sortBy: {
+      featured: string;
+      nameAsc: string;
+      priceAsc: string;
+      priceDesc: string;
+    };
+    perPageSuffix: string;
+    pagination: {
+      previous: string;
+      next: string;
+    };
+  };
 }
 
 export const translations: Record<Locale, Translation> = {
@@ -237,6 +257,27 @@ export const translations: Record<Locale, Translation> = {
         openDaily: 'Open Daily',
         viewLargerMap: 'View larger map',
         missingMapToken: 'Missing NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN — unable to display the map.',
+      },
+    },
+    shopPage: {
+      title: 'Shop All Products',
+      description:
+        'Browse our full range of imported wines, spirits, and everyday essentials.',
+      searchPlaceholder: 'Search products...',
+      filtersAll: 'All Products',
+      resultsSuffix: 'products',
+      addToCart: 'Add to Cart',
+      empty: 'No products match your search.',
+      sortBy: {
+        featured: 'Featured',
+        nameAsc: 'Name: A-Z',
+        priceAsc: 'Price: Low to High',
+        priceDesc: 'Price: High to Low',
+      },
+      perPageSuffix: '/ page',
+      pagination: {
+        previous: 'Previous page',
+        next: 'Next page',
       },
     },
   },
@@ -369,6 +410,26 @@ export const translations: Record<Locale, Translation> = {
         openDaily: 'Mở Cửa Hằng Ngày',
         viewLargerMap: 'Xem bản đồ lớn hơn',
         missingMapToken: 'Thiếu NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN — không thể hiển thị bản đồ.',
+      },
+    },
+    shopPage: {
+      title: 'Tất Cả Sản Phẩm',
+      description: 'Khám phá toàn bộ rượu vang, rượu mạnh nhập khẩu và nhu yếu phẩm hàng ngày.',
+      searchPlaceholder: 'Tìm kiếm sản phẩm...',
+      filtersAll: 'Tất Cả Sản Phẩm',
+      resultsSuffix: 'sản phẩm',
+      addToCart: 'Thêm Vào Giỏ',
+      empty: 'Không tìm thấy sản phẩm phù hợp.',
+      sortBy: {
+        featured: 'Nổi Bật',
+        nameAsc: 'Tên: A-Z',
+        priceAsc: 'Giá: Thấp Đến Cao',
+        priceDesc: 'Giá: Cao Đến Thấp',
+      },
+      perPageSuffix: '/ trang',
+      pagination: {
+        previous: 'Trang trước',
+        next: 'Trang sau',
       },
     },
   },
