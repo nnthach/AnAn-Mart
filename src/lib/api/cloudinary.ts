@@ -1,8 +1,6 @@
-import { env } from '@/config/env';
-
 const uploadSingleFile = async (file: File) => {
-  const cloudName = env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
-  const uploadPreset = env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
+  const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+  const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
 
   if (!cloudName || !uploadPreset) {
     throw new Error('Missing Cloudinary env');
