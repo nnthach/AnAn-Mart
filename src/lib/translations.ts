@@ -160,6 +160,67 @@ interface Translation {
     };
     relatedProducts: string;
   };
+  admin: {
+    brand: {
+      name: string;
+      tagline: string;
+    };
+    sidebar: {
+      groups: {
+        management: string;
+        storeManagement: string;
+        products: string;
+      };
+      nav: {
+        dashboard: string;
+        staffs: string;
+        orders: string;
+        reviews: string;
+        customers: string;
+        stores: string;
+        storeInventories: string;
+        products: string;
+        categories: string;
+        ingredients: string;
+      };
+      user: {
+        profile: string;
+        account: string;
+        signOut: string;
+      };
+    };
+    header: {
+      notifications: string;
+      account: string;
+    };
+    headerBreadcrumb: {
+      dashboard: string;
+      staffs: string;
+      orders: string;
+      reviews: string;
+      customers: string;
+      stores: string;
+      storeInventories: string;
+      products: string;
+      categories: string;
+      ingredients: string;
+      settings: string;
+    };
+    headerDropdown: {
+      profile: string;
+      signOut: string;
+    };
+    dashboard: {
+      title: string;
+      welcome: string;
+      stats: {
+        revenue: string;
+        orders: string;
+        customers: string;
+        products: string;
+      };
+    };
+  };
 }
 
 export const translations: Record<Locale, Translation> = {
@@ -338,6 +399,67 @@ export const translations: Record<Locale, Translation> = {
         next: 'Next page',
       },
       relatedProducts: 'You May Also Like',
+    },
+    admin: {
+      brand: {
+        name: 'An An Mart',
+        tagline: 'Admin CMS',
+      },
+      sidebar: {
+        groups: {
+          management: 'Management',
+          storeManagement: 'Store Management',
+          products: 'Products',
+        },
+        nav: {
+          dashboard: 'Dashboard',
+          staffs: 'Staff',
+          orders: 'Orders',
+          reviews: 'Reviews',
+          customers: 'Customers',
+          stores: 'Stores',
+          storeInventories: 'Store Inventory',
+          products: 'Products',
+          categories: 'Categories',
+          ingredients: 'Ingredients',
+        },
+        user: {
+          profile: 'Profile',
+          account: 'Account',
+          signOut: 'Sign Out',
+        },
+      },
+      header: {
+        notifications: 'Notifications',
+        account: 'Account',
+      },
+      headerBreadcrumb: {
+        dashboard: 'Dashboard',
+        staffs: 'Staff',
+        orders: 'Orders',
+        reviews: 'Reviews',
+        customers: 'Customers',
+        stores: 'Stores',
+        storeInventories: 'Store Inventory',
+        products: 'Products',
+        categories: 'Categories',
+        ingredients: 'Ingredients',
+        settings: 'Settings',
+      },
+      headerDropdown: {
+        profile: 'Profile',
+        signOut: 'Sign Out',
+      },
+      dashboard: {
+        title: 'Dashboard',
+        welcome: "Here's what's happening with your store today.",
+        stats: {
+          revenue: 'Total Revenue',
+          orders: 'Orders',
+          customers: 'Customers',
+          products: 'Products',
+        },
+      },
     },
   },
   vi: {
@@ -520,6 +642,67 @@ export const translations: Record<Locale, Translation> = {
         next: 'Trang sau',
       },
       relatedProducts: 'Có Thể Bạn Cũng Thích',
+    },
+    admin: {
+      brand: {
+        name: 'An An Mart',
+        tagline: 'Quản Trị CMS',
+      },
+      sidebar: {
+        groups: {
+          management: 'Quản Lý',
+          storeManagement: 'Quản Lý Cửa Hàng',
+          products: 'Sản Phẩm',
+        },
+        nav: {
+          dashboard: 'Tổng Quan',
+          staffs: 'Nhân Viên',
+          orders: 'Đơn Hàng',
+          reviews: 'Đánh Giá',
+          customers: 'Khách Hàng',
+          stores: 'Cửa Hàng',
+          storeInventories: 'Kho Hàng',
+          products: 'Sản Phẩm',
+          categories: 'Danh Mục',
+          ingredients: 'Nguyên Liệu',
+        },
+        user: {
+          profile: 'Hồ Sơ',
+          account: 'Tài Khoản',
+          signOut: 'Đăng Xuất',
+        },
+      },
+      header: {
+        notifications: 'Thông Báo',
+        account: 'Tài Khoản',
+      },
+      headerBreadcrumb: {
+        dashboard: 'Tổng Quan',
+        staffs: 'Nhân Viên',
+        orders: 'Đơn Hàng',
+        reviews: 'Đánh Giá',
+        customers: 'Khách Hàng',
+        stores: 'Cửa Hàng',
+        storeInventories: 'Kho Hàng',
+        products: 'Sản Phẩm',
+        categories: 'Danh Mục',
+        ingredients: 'Nguyên Liệu',
+        settings: 'Cài Đặt',
+      },
+      headerDropdown: {
+        profile: 'Hồ Sơ',
+        signOut: 'Đăng Xuất',
+      },
+      dashboard: {
+        title: 'Tổng Quan',
+        welcome: 'Đây là tình hình cửa hàng của bạn hôm nay.',
+        stats: {
+          revenue: 'Tổng Doanh Thu',
+          orders: 'Đơn Hàng',
+          customers: 'Khách Hàng',
+          products: 'Sản Phẩm',
+        },
+      },
     },
   },
 };
