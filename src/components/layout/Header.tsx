@@ -26,14 +26,19 @@ const NAV_LINKS = [
   { key: 'contact', href: '/contact' },
 ] as const;
 
-export default function Header() {
+interface HeaderProps {
+  forceScrolled?: boolean;
+}
+
+export default function Header({ forceScrolled = false }: HeaderProps) {
   const { t } = useI18n();
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [hasScrolled, setHasScrolled] = useState(false);
+  const isScrolled = forceScrolled || hasScrolled;
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 8);
+    const handleScroll = () => setHasScrolled(window.scrollY > 8);
     handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);

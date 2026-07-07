@@ -130,6 +130,7 @@ interface Translation {
       previous: string;
       next: string;
     };
+    relatedProducts: string;
   };
 }
 
@@ -279,6 +280,7 @@ export const translations: Record<Locale, Translation> = {
         previous: 'Previous page',
         next: 'Next page',
       },
+      relatedProducts: 'You May Also Like',
     },
   },
   vi: {
@@ -431,6 +433,7 @@ export const translations: Record<Locale, Translation> = {
         previous: 'Trang trước',
         next: 'Trang sau',
       },
+      relatedProducts: 'Có Thể Bạn Cũng Thích',
     },
   },
 };
