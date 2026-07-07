@@ -2,7 +2,7 @@ import { ShoppingCart } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { formatPrice, type Product } from '@/app/shop/_lib/products';
+import { formatPrice, type Product } from '@/app/(public)/shop/_lib/products';
 
 interface ProductCardProps {
   product: Product;
@@ -13,7 +13,10 @@ interface ProductCardProps {
 export function ProductCard({ product, categoryLabel, addToCartLabel }: ProductCardProps) {
   return (
     <article className="border-border group flex flex-col overflow-hidden rounded-xl border bg-white transition-shadow hover:shadow-lg">
-      <Link href={`/shop/${product.id}`} className="relative aspect-square overflow-hidden bg-gray-100">
+      <Link
+        href={`/shop/${product.id}`}
+        className="relative aspect-square overflow-hidden bg-gray-100"
+      >
         <Image
           src={product.image}
           alt={product.name}

@@ -1,6 +1,6 @@
 import { Search } from 'lucide-react';
 
-import type { ProductCategory } from '@/app/shop/_lib/products';
+import type { ProductCategory } from '@/app/(public)/shop/_lib/products';
 import { Input } from '@/components/ui/input';
 
 export type SortOption = 'featured' | 'nameAsc' | 'priceAsc' | 'priceDesc';

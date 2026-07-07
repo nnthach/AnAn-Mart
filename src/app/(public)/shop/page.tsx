@@ -1,5 +1,5 @@
-import ShopHeroSection from '@/app/shop/_components/ShopHeroSection';
-import ShopSection from '@/app/shop/_components/ShopSection';
+import ShopHeroSection from '@/app/(public)/shop/_components/ShopHeroSection';
+import ShopSection from '@/app/(public)/shop/_components/ShopSection';
 import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
 

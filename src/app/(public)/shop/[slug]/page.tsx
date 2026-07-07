@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 
-import { ProductDetailView } from '@/app/shop/[slug]/_components/ProductDetailView';
-import { getProductById } from '@/app/shop/_lib/products';
+import { ProductDetailView } from '@/app/(public)/shop/[slug]/_components/ProductDetailView';
+import { getProductById } from '@/app/(public)/shop/_lib/products';
 import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
 

@@ -1,6 +1,6 @@
-import AboutCta from '@/app/about/_components/AboutCta';
-import AboutHeroSection from '@/app/about/_components/AboutHeroSection';
-import OurStory from '@/app/about/_components/OurStory';
+import AboutCta from '@/app/(public)/about/_components/AboutCta';
+import AboutHeroSection from '@/app/(public)/about/_components/AboutHeroSection';
+import OurStory from '@/app/(public)/about/_components/OurStory';
 import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
 

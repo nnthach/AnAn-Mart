@@ -4,9 +4,9 @@ import { ShoppingCart } from 'lucide-react';
 import Link from 'next/link';
 import { useMemo } from 'react';
 
-import { ProductGallery } from '@/app/shop/[slug]/_components/ProductGallery';
-import { ProductCard } from '@/app/shop/_components/ProductCard';
-import { formatPrice, PRODUCTS, type Product } from '@/app/shop/_lib/products';
+import { ProductGallery } from '@/app/(public)/shop/[slug]/_components/ProductGallery';
+import { ProductCard } from '@/app/(public)/shop/_components/ProductCard';
+import { formatPrice, PRODUCTS, type Product } from '@/app/(public)/shop/_lib/products';
 import {
   Breadcrumb,
   BreadcrumbItem,

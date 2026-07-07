@@ -1,7 +1,7 @@
 import { ChevronLeft, ChevronRight, PackageSearch } from 'lucide-react';
 
-import { ProductCard } from '@/app/shop/_components/ProductCard';
-import type { Product, ProductCategory } from '@/app/shop/_lib/products';
+import { ProductCard } from '@/app/(public)/shop/_components/ProductCard';
+import type { Product, ProductCategory } from '@/app/(public)/shop/_lib/products';
 import { cn } from '@/lib/utils';
 
 interface ProductGridProps {

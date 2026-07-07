@@ -4,17 +4,18 @@ import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useEffect, useRef } from 'react';
 
+import { env } from '@/config/env';
 import { useI18n } from '@/context/I18nContext';
 
 const STORE_NAME = 'An An Mart';
 const STORE_ADDRESS_LINES = ['191 Lý Thường Kiệt,', 'Hội An, Quảng Nam, Vietnam'];
 const STORE_COORDINATES: [number, number] = [
-  Number(process.env.NEXT_PUBLIC_STORE_LNG),
-  Number(process.env.NEXT_PUBLIC_STORE_LAT),
+  Number(env.NEXT_PUBLIC_STORE_LNG),
+  Number(env.NEXT_PUBLIC_STORE_LAT),
 ]; // 191 Lý Thường Kiệt, Minh An, Hội An
 const GOOGLE_MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${STORE_COORDINATES[1]},${STORE_COORDINATES[0]}`;
 
-const MAPBOX_ACCESS_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
+const MAPBOX_ACCESS_TOKEN = env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
 
 export default function LocationMap() {
   const { t } = useI18n();

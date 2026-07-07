@@ -10,6 +10,11 @@ const EnvSchema = z.object({
   NEXT_PUBLIC_SUPABASE_URL: z.string().url(),
   NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: z.string().url(),
 
+  // mapbox 
+  NEXT_PUBLIC_STORE_LNG: z.string().url(),
+  NEXT_PUBLIC_STORE_LAT: z.string().url(),
+  NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN: z.string().url(),
+
   // Server-side secret — thêm tại đây, ví dụ:
   DATABASE_URL: z.string().url(),
   SUPABASE_SECRET_KEY: z.string().url(),

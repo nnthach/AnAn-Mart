@@ -2,9 +2,13 @@
 
 import { useEffect, useMemo, useState } from 'react';
 
-import { ProductGrid } from '@/app/shop/_components/ProductGrid';
-import { ShopToolbar, type SortOption } from '@/app/shop/_components/ShopToolbar';
-import { PRODUCT_CATEGORIES, PRODUCTS, type ProductCategory } from '@/app/shop/_lib/products';
+import { ProductGrid } from '@/app/(public)/shop/_components/ProductGrid';
+import { ShopToolbar, type SortOption } from '@/app/(public)/shop/_components/ShopToolbar';
+import {
+  PRODUCT_CATEGORIES,
+  PRODUCTS,
+  type ProductCategory,
+} from '@/app/(public)/shop/_lib/products';
 import { useI18n } from '@/context/I18nContext';
 import { useDebounce } from '@/hooks/useDebounce';
 

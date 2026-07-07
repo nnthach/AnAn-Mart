@@ -1,5 +1,5 @@
-import ContactHeroSection from '@/app/contact/_components/ContactHeroSection';
-import ContactSection from '@/app/contact/_components/ContactSection';
+import ContactHeroSection from '@/app/(public)/contact/_components/ContactHeroSection';
+import ContactSection from '@/app/(public)/contact/_components/ContactSection';
 import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
 
