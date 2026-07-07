@@ -1,229 +1,6 @@
 export type Locale = 'en' | 'vi';
 
-interface TitleSubtitle {
-  title: string;
-  subtitle: string;
-}
-
-interface TitleDescription {
-  title: string;
-  description: string;
-}
-
-interface Translation {
-  header: {
-    nav: {
-      home: string;
-      shop: string;
-      aboutUs: string;
-      delivery: string;
-      blog: string;
-      contact: string;
-    };
-    signIn: string;
-    menu: {
-      open: string;
-      close: string;
-    };
-  };
-  footer: {
-    tagline: string;
-    contactTitle: string;
-    quickLinksTitle: string;
-    popularCategoriesTitle: string;
-    openDaily: string;
-    quickLinks: {
-      shop: string;
-      aboutUs: string;
-      delivery: string;
-      blog: string;
-      contact: string;
-      terms: string;
-    };
-    popularCategories: {
-      wine: string;
-      whisky: string;
-      craftBeer: string;
-      snacks: string;
-      coffee: string;
-      souvenirs: string;
-      travelEssentials: string;
-    };
-    copyright: string;
-  };
-  homepage: {
-    hero: {
-      eyebrow: string;
-      titleHighlight: string;
-      subtitle: string;
-      description: string;
-      shopNow: string;
-      visitStore: string;
-      trustBadges: {
-        fastDelivery: TitleSubtitle;
-        importedProducts: TitleSubtitle;
-        support: TitleSubtitle;
-      };
-    };
-    categoryGrid: {
-      heading: string;
-      categories: {
-        premiumWines: TitleSubtitle;
-        whisky: TitleSubtitle;
-        craftBeer: TitleSubtitle;
-        coffee: TitleSubtitle;
-        snacks: TitleSubtitle;
-        drinks: TitleSubtitle;
-        souvenirs: TitleSubtitle;
-        travelEssentials: TitleSubtitle;
-      };
-    };
-    featuredCollections: {
-      heading: string;
-      shopNow: string;
-      collections: {
-        wine: TitleDescription;
-        whisky: TitleDescription;
-        gourmetSnacks: TitleDescription;
-        coffee: TitleDescription;
-      };
-    };
-    giftBanner: {
-      title: string;
-      description: string;
-      cta: string;
-    };
-    whyChooseUs: {
-      heading: string;
-      features: {
-        wideSelection: TitleSubtitle;
-        bestQuality: TitleSubtitle;
-        fastDelivery: TitleSubtitle;
-        support: TitleSubtitle;
-        giftWrapping: TitleSubtitle;
-        securePayment: TitleSubtitle;
-      };
-    };
-    storeGallery: {
-      visitOurStore: string;
-      openDaily: string;
-    };
-  };
-  locationMap: {
-    viewLargerMap: string;
-    missingMapToken: string;
-  };
-  aboutPage: {
-    title: string;
-    tagline: string;
-    storyHeading: string;
-    storyParagraph: string;
-    stats: {
-      years: string;
-      products: string;
-      customers: string;
-    };
-    ctaTitle: string;
-    ctaButton: string;
-  };
-  contactPage: {
-    title: string;
-    tagline: string;
-    infoHeading: string;
-    formHeading: string;
-    nameLabel: string;
-    namePlaceholder: string;
-    emailLabel: string;
-    emailPlaceholder: string;
-    messageLabel: string;
-    messagePlaceholder: string;
-    submitButton: string;
-  };
-  shopPage: {
-    title: string;
-    description: string;
-    searchPlaceholder: string;
-    filtersAll: string;
-    resultsSuffix: string;
-    addToCart: string;
-    empty: string;
-    sortBy: {
-      featured: string;
-      nameAsc: string;
-      priceAsc: string;
-      priceDesc: string;
-    };
-    perPageSuffix: string;
-    pagination: {
-      previous: string;
-      next: string;
-    };
-    relatedProducts: string;
-  };
-  admin: {
-    brand: {
-      name: string;
-      tagline: string;
-    };
-    sidebar: {
-      groups: {
-        management: string;
-        storeManagement: string;
-        products: string;
-      };
-      nav: {
-        dashboard: string;
-        staffs: string;
-        orders: string;
-        reviews: string;
-        customers: string;
-        stores: string;
-        storeInventories: string;
-        products: string;
-        categories: string;
-        ingredients: string;
-      };
-      user: {
-        profile: string;
-        account: string;
-        signOut: string;
-      };
-    };
-    header: {
-      notifications: string;
-      account: string;
-    };
-    headerBreadcrumb: {
-      dashboard: string;
-      staffs: string;
-      orders: string;
-      reviews: string;
-      customers: string;
-      stores: string;
-      storeInventories: string;
-      products: string;
-      categories: string;
-      ingredients: string;
-      settings: string;
-    };
-    headerDropdown: {
-      profile: string;
-      signOut: string;
-    };
-    dashboard: {
-      title: string;
-      welcome: string;
-      stats: {
-        revenue: string;
-        orders: string;
-        customers: string;
-        products: string;
-      };
-    };
-  };
-}
-
-export const translations: Record<Locale, Translation> = {
+export const translations = {
   en: {
     header: {
       nav: {
@@ -315,8 +92,7 @@ export const translations: Record<Locale, Translation> = {
       },
       giftBanner: {
         title: 'Looking for the Perfect Gift?',
-        description:
-          'We offer beautiful gift wrapping and premium gift sets for any occasion.',
+        description: 'We offer beautiful gift wrapping and premium gift sets for any occasion.',
         cta: 'Explore Gift Sets',
       },
       whyChooseUs: {
@@ -380,8 +156,7 @@ export const translations: Record<Locale, Translation> = {
     },
     shopPage: {
       title: 'Shop All Products',
-      description:
-        'Browse our full range of imported wines, spirits, and everyday essentials.',
+      description: 'Browse our full range of imported wines, spirits, and everyday essentials.',
       searchPlaceholder: 'Search products...',
       filtersAll: 'All Products',
       resultsSuffix: 'products',
@@ -460,6 +235,160 @@ export const translations: Record<Locale, Translation> = {
           products: 'Products',
         },
       },
+      table: {
+        columns: {
+          no: '#',
+          status: 'Status',
+          createdAt: 'Created At',
+          actions: 'Actions',
+        },
+        pagination: {
+          showing: 'Showing',
+          of: 'of',
+          items: 'items',
+          previous: 'Previous page',
+          next: 'Next page',
+        },
+        status: {
+          active: 'Active',
+          inactive: 'Inactive',
+        },
+        empty: 'No results found.',
+      },
+      productsPage: {
+        headerTitle: {
+          title: 'Products',
+          subtitle: 'Manage your product catalog.',
+        },
+        table: {
+          columns: {
+            image: 'Image',
+            name: 'Name',
+            price: 'Price',
+            category: 'Category',
+          },
+        },
+        filters: {
+          statusLabel: 'Status',
+          statusAll: 'All',
+          statusActive: 'Active',
+          statusInactive: 'Inactive',
+          orderLabel: 'Order',
+          orderDesc: 'Newest first',
+          orderAsc: 'Oldest first',
+          limitLabel: 'Rows per page',
+        },
+        searchPlaceholder: 'Search products...',
+        clearSearch: 'Clear search',
+        deleteFailed: 'Failed to delete the product.',
+        createModal: {
+          trigger: 'Add Product',
+          title: 'Add Product',
+          submit: 'Create',
+          fields: {
+            nameVi: 'Name (Vietnamese)',
+            nameEn: 'Name (English)',
+            price: 'Price (VND)',
+            descriptionVi: 'Description (Vietnamese)',
+            descriptionEn: 'Description (English)',
+            category: 'Category',
+            categoryPlaceholder: 'Select a category',
+          },
+          errors: {
+            nameViRequired: 'Vietnamese name is required.',
+            priceRequired: 'Price must be greater than 0.',
+            categoryRequired: 'Please select a category.',
+          },
+        },
+        updateModal: {
+          title: 'Edit Product',
+          submit: 'Save Changes',
+          fields: {
+            nameVi: 'Name (Vietnamese)',
+            nameEn: 'Name (English)',
+            price: 'Price (VND)',
+            descriptionVi: 'Description (Vietnamese)',
+            descriptionEn: 'Description (English)',
+            category: 'Category',
+            categoryPlaceholder: 'Select a category',
+          },
+          errors: {
+            nameViRequired: 'Vietnamese name is required.',
+            priceRequired: 'Price must be greater than 0.',
+            categoryRequired: 'Please select a category.',
+          },
+        },
+      },
+      categoriesPage: {
+        headerTitle: {
+          title: 'Categories',
+          subtitle: 'Manage your product categories.',
+        },
+        table: {
+          columns: {
+            name: 'Name',
+            description: 'Description',
+          },
+        },
+        filters: {
+          statusLabel: 'Status',
+          statusAll: 'All',
+          statusActive: 'Active',
+          statusInactive: 'Inactive',
+          sortByLabel: 'Sort by',
+          sortByCreatedAt: 'Created date',
+          sortByName: 'Name',
+          orderLabel: 'Order',
+          orderDesc: 'Descending',
+          orderAsc: 'Ascending',
+          limitLabel: 'Rows per page',
+        },
+        deleteFailed: 'Failed to delete the category.',
+        createModal: {
+          trigger: 'Add Category',
+          title: 'Add Category',
+          submit: 'Create',
+          fields: {
+            nameVi: 'Name (Vietnamese)',
+            nameEn: 'Name (English)',
+            descriptionVi: 'Description (Vietnamese)',
+            descriptionEn: 'Description (English)',
+          },
+          errors: {
+            nameViRequired: 'Vietnamese name is required.',
+            nameEnRequired: 'English name is required.',
+            descriptionViRequired: 'Vietnamese description is required.',
+            descriptionEnRequired: 'English description is required.',
+          },
+        },
+        updateModal: {
+          title: 'Edit Category',
+          submit: 'Save Changes',
+          fields: {
+            nameVi: 'Name (Vietnamese)',
+            nameEn: 'Name (English)',
+            descriptionVi: 'Description (Vietnamese)',
+            descriptionEn: 'Description (English)',
+          },
+          errors: {
+            nameViRequired: 'Vietnamese name is required.',
+            nameEnRequired: 'English name is required.',
+            descriptionViRequired: 'Vietnamese description is required.',
+            descriptionEnRequired: 'English description is required.',
+          },
+        },
+      },
+      modal: {
+        image: 'Images',
+        addImage: 'Add image',
+        loading: 'Loading...',
+        cancel: 'Cancel',
+      },
+    },
+    button: {
+      filter: 'Filter',
+      apply: 'Apply',
+      clearFilter: 'Clear filter',
     },
   },
   vi: {
@@ -611,7 +540,8 @@ export const translations: Record<Locale, Translation> = {
     },
     contactPage: {
       title: 'Liên Hệ',
-      tagline: 'Có câu hỏi, muốn đặt hàng, hay chỉ đơn giản là muốn chào hỏi — chúng tôi luôn sẵn lòng lắng nghe.',
+      tagline:
+        'Có câu hỏi, muốn đặt hàng, hay chỉ đơn giản là muốn chào hỏi — chúng tôi luôn sẵn lòng lắng nghe.',
       infoHeading: 'Thông Tin Liên Hệ',
       formHeading: 'Gửi Tin Nhắn Cho Chúng Tôi',
       nameLabel: 'Họ Tên',
@@ -703,6 +633,160 @@ export const translations: Record<Locale, Translation> = {
           products: 'Sản Phẩm',
         },
       },
+      table: {
+        columns: {
+          no: '#',
+          status: 'Trạng Thái',
+          createdAt: 'Ngày Tạo',
+          actions: 'Thao Tác',
+        },
+        pagination: {
+          showing: 'Hiển thị',
+          of: 'trong',
+          items: 'mục',
+          previous: 'Trang trước',
+          next: 'Trang sau',
+        },
+        status: {
+          active: 'Hoạt Động',
+          inactive: 'Không Hoạt Động',
+        },
+        empty: 'Không tìm thấy kết quả nào.',
+      },
+      productsPage: {
+        headerTitle: {
+          title: 'Sản Phẩm',
+          subtitle: 'Quản lý danh mục sản phẩm của bạn.',
+        },
+        table: {
+          columns: {
+            image: 'Hình Ảnh',
+            name: 'Tên',
+            price: 'Giá',
+            category: 'Danh Mục',
+          },
+        },
+        filters: {
+          statusLabel: 'Trạng thái',
+          statusAll: 'Tất cả',
+          statusActive: 'Đang hoạt động',
+          statusInactive: 'Không hoạt động',
+          orderLabel: 'Thứ tự',
+          orderDesc: 'Mới nhất trước',
+          orderAsc: 'Cũ nhất trước',
+          limitLabel: 'Số dòng mỗi trang',
+        },
+        searchPlaceholder: 'Tìm sản phẩm...',
+        clearSearch: 'Xóa tìm kiếm',
+        deleteFailed: 'Xóa sản phẩm thất bại.',
+        createModal: {
+          trigger: 'Thêm Sản Phẩm',
+          title: 'Thêm Sản Phẩm',
+          submit: 'Tạo Mới',
+          fields: {
+            nameVi: 'Tên (Tiếng Việt)',
+            nameEn: 'Tên (Tiếng Anh)',
+            price: 'Giá (VND)',
+            descriptionVi: 'Mô Tả (Tiếng Việt)',
+            descriptionEn: 'Mô Tả (Tiếng Anh)',
+            category: 'Danh Mục',
+            categoryPlaceholder: 'Chọn danh mục',
+          },
+          errors: {
+            nameViRequired: 'Vui lòng nhập tên tiếng Việt.',
+            priceRequired: 'Giá phải lớn hơn 0.',
+            categoryRequired: 'Vui lòng chọn danh mục.',
+          },
+        },
+        updateModal: {
+          title: 'Sửa Sản Phẩm',
+          submit: 'Lưu Thay Đổi',
+          fields: {
+            nameVi: 'Tên (Tiếng Việt)',
+            nameEn: 'Tên (Tiếng Anh)',
+            price: 'Giá (VND)',
+            descriptionVi: 'Mô Tả (Tiếng Việt)',
+            descriptionEn: 'Mô Tả (Tiếng Anh)',
+            category: 'Danh Mục',
+            categoryPlaceholder: 'Chọn danh mục',
+          },
+          errors: {
+            nameViRequired: 'Vui lòng nhập tên tiếng Việt.',
+            priceRequired: 'Giá phải lớn hơn 0.',
+            categoryRequired: 'Vui lòng chọn danh mục.',
+          },
+        },
+      },
+      categoriesPage: {
+        headerTitle: {
+          title: 'Danh Mục',
+          subtitle: 'Quản lý danh mục sản phẩm của bạn.',
+        },
+        table: {
+          columns: {
+            name: 'Tên',
+            description: 'Mô Tả',
+          },
+        },
+        filters: {
+          statusLabel: 'Trạng thái',
+          statusAll: 'Tất cả',
+          statusActive: 'Đang hoạt động',
+          statusInactive: 'Không hoạt động',
+          sortByLabel: 'Sắp xếp theo',
+          sortByCreatedAt: 'Ngày tạo',
+          sortByName: 'Tên',
+          orderLabel: 'Thứ tự',
+          orderDesc: 'Giảm dần',
+          orderAsc: 'Tăng dần',
+          limitLabel: 'Số dòng mỗi trang',
+        },
+        deleteFailed: 'Xóa danh mục thất bại.',
+        createModal: {
+          trigger: 'Thêm Danh Mục',
+          title: 'Thêm Danh Mục',
+          submit: 'Tạo Mới',
+          fields: {
+            nameVi: 'Tên (Tiếng Việt)',
+            nameEn: 'Tên (Tiếng Anh)',
+            descriptionVi: 'Mô Tả (Tiếng Việt)',
+            descriptionEn: 'Mô Tả (Tiếng Anh)',
+          },
+          errors: {
+            nameViRequired: 'Vui lòng nhập tên tiếng Việt.',
+            nameEnRequired: 'Vui lòng nhập tên tiếng Anh.',
+            descriptionViRequired: 'Vui lòng nhập mô tả tiếng Việt.',
+            descriptionEnRequired: 'Vui lòng nhập mô tả tiếng Anh.',
+          },
+        },
+        updateModal: {
+          title: 'Sửa Danh Mục',
+          submit: 'Lưu Thay Đổi',
+          fields: {
+            nameVi: 'Tên (Tiếng Việt)',
+            nameEn: 'Tên (Tiếng Anh)',
+            descriptionVi: 'Mô Tả (Tiếng Việt)',
+            descriptionEn: 'Mô Tả (Tiếng Anh)',
+          },
+          errors: {
+            nameViRequired: 'Vui lòng nhập tên tiếng Việt.',
+            nameEnRequired: 'Vui lòng nhập tên tiếng Anh.',
+            descriptionViRequired: 'Vui lòng nhập mô tả tiếng Việt.',
+            descriptionEnRequired: 'Vui lòng nhập mô tả tiếng Anh.',
+          },
+        },
+      },
+      modal: {
+        image: 'Hình Ảnh',
+        addImage: 'Thêm hình',
+        loading: 'Đang tải...',
+        cancel: 'Hủy',
+      },
+    },
+    button: {
+      filter: 'Bộ Lọc',
+      apply: 'Áp Dụng',
+      clearFilter: 'Xóa Bộ Lọc',
     },
   },
 };

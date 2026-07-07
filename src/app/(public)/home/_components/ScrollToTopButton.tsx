@@ -1,9 +1,10 @@
 "use client";
 
-import { cn } from "@/lib/utils";
 import { ArrowUp } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Button } from "../ui/button";
+
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 export default function ScrollToTopButton() {
   const [visible, setVisible] = useState(false);
@@ -21,7 +22,6 @@ export default function ScrollToTopButton() {
 
   return (
     <Button
-      variant={"accent"}
       onClick={scrollToTop}
       aria-label="Scroll to top"
       className={cn(
