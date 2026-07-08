@@ -17,7 +17,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { useI18n } from '@/context/I18nContext';
-import { uploadFileToCloudinary } from '@/lib/api/cloudinary';
+import { uploadFileToCloudinary } from '@/lib/upload-cloudinary';
 import { createProductSchema, type ProductFormData } from '@/lib/validations/products';
 import { listCategoriesAction } from '@/server/actions/categories';
 import { updateProductAction } from '@/server/actions/products';
