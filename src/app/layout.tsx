@@ -1,7 +1,9 @@
 import './globals.css';
 
 import { Geist, Playfair_Display } from 'next/font/google';
+import { Toaster } from 'react-hot-toast';
 
+import { AuthProviderWrapper } from '@/context/AuthProviderWrapper';
 import { I18nProvider } from '@/context/I18nContext';
 import { cn } from '@/lib/utils';
 
@@ -21,7 +23,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="vi" className={cn('font-sans', geist.variable, playfairDisplay.variable)}>
       <body className="min-h-screen bg-white text-gray-900 antialiased">
-        <I18nProvider>{children}</I18nProvider>
+        <I18nProvider>
+          <AuthProviderWrapper>{children}</AuthProviderWrapper>
+        </I18nProvider>
+        <Toaster position="top-right" reverseOrder={false} />
       </body>
     </html>
   );

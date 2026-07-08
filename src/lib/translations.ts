@@ -16,6 +16,12 @@ export const translations = {
         open: 'Open menu',
         close: 'Close menu',
       },
+      dropdown: {
+        accountMenu: 'Account menu',
+        dashboard: 'Dashboard',
+        profile: 'Profile',
+        signOut: 'Sign Out',
+      },
     },
     footer: {
       tagline:
@@ -393,6 +399,48 @@ export const translations = {
       apply: 'Apply',
       clearFilter: 'Clear filter',
     },
+    authPage: {
+      signinPage: {
+        title: 'Welcome Back',
+        subtitle: 'Sign in to continue shopping with An An Mart',
+        tagline:
+          'Fresh groceries, fine wines, and everyday essentials — delivered with care across Hoi An.',
+        emailLabel: 'Email',
+        emailPlaceholder: 'you@example.com',
+        passwordLabel: 'Password',
+        passwordPlaceholder: 'Enter your password',
+        submit: 'Sign In',
+        noAccount: "Don't have an account?",
+        signUpLink: 'Sign up',
+        errors: {
+          emailRequired: 'Email is required.',
+          emailInvalid: 'Invalid email address.',
+          passwordRequired: 'Password must be at least 6 characters.',
+        },
+      },
+      signupPage: {
+        title: 'Create Account',
+        subtitle: 'Join An An Mart for a faster shopping experience',
+        tagline:
+          'Fresh groceries, fine wines, and everyday essentials — delivered with care across Hoi An.',
+        fullNameLabel: 'Full Name',
+        fullNamePlaceholder: 'Your full name',
+        emailLabel: 'Email',
+        emailPlaceholder: 'you@example.com',
+        passwordLabel: 'Password',
+        passwordPlaceholder: 'At least 6 characters',
+        submit: 'Sign Up',
+        haveAccount: 'Already have an account?',
+        signInLink: 'Sign in',
+        errors: {
+          fullNameRequired: 'Full name is required.',
+          emailRequired: 'Email is required.',
+          emailInvalid: 'Invalid email address.',
+          passwordRequired: 'Password is required.',
+          passwordTooShort: 'Password must be at least 6 characters.',
+        },
+      },
+    },
   },
   vi: {
     header: {
@@ -408,6 +456,12 @@ export const translations = {
       menu: {
         open: 'Mở menu',
         close: 'Đóng menu',
+      },
+      dropdown: {
+        accountMenu: 'Menu tài khoản',
+        dashboard: 'Quản Lý',
+        profile: 'Hồ Sơ',
+        signOut: 'Đăng Xuất',
       },
     },
     footer: {
@@ -793,6 +847,48 @@ export const translations = {
       filter: 'Bộ Lọc',
       apply: 'Áp Dụng',
       clearFilter: 'Xóa Bộ Lọc',
+    },
+    authPage: {
+      signinPage: {
+        title: 'Chào Mừng Trở Lại',
+        subtitle: 'Đăng nhập để tiếp tục mua sắm cùng An An Mart',
+        tagline:
+          'Tạp hóa tươi ngon, rượu vang thượng hạng và nhu yếu phẩm hàng ngày — giao tận nơi khắp Hội An.',
+        emailLabel: 'Email',
+        emailPlaceholder: 'ban@example.com',
+        passwordLabel: 'Mật khẩu',
+        passwordPlaceholder: 'Nhập mật khẩu của bạn',
+        submit: 'Đăng Nhập',
+        noAccount: 'Chưa có tài khoản?',
+        signUpLink: 'Đăng ký',
+        errors: {
+          emailRequired: 'Vui lòng nhập email.',
+          emailInvalid: 'Email không hợp lệ.',
+          passwordRequired: 'Mật khẩu phải có ít nhất 6 ký tự.',
+        },
+      },
+      signupPage: {
+        title: 'Tạo Tài Khoản',
+        subtitle: 'Tham gia An An Mart để mua sắm nhanh chóng hơn',
+        tagline:
+          'Tạp hóa tươi ngon, rượu vang thượng hạng và nhu yếu phẩm hàng ngày — giao tận nơi khắp Hội An.',
+        fullNameLabel: 'Họ và Tên',
+        fullNamePlaceholder: 'Nhập họ và tên của bạn',
+        emailLabel: 'Email',
+        emailPlaceholder: 'ban@example.com',
+        passwordLabel: 'Mật khẩu',
+        passwordPlaceholder: 'Ít nhất 6 ký tự',
+        submit: 'Đăng Ký',
+        haveAccount: 'Đã có tài khoản?',
+        signInLink: 'Đăng nhập',
+        errors: {
+          fullNameRequired: 'Vui lòng nhập họ và tên.',
+          emailRequired: 'Vui lòng nhập email.',
+          emailInvalid: 'Email không hợp lệ.',
+          passwordRequired: 'Vui lòng nhập mật khẩu.',
+          passwordTooShort: 'Mật khẩu phải có ít nhất 6 ký tự.',
+        },
+      },
     },
   },
 };

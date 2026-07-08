@@ -7,6 +7,16 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import LanguageToggle from '@/components/features/LanguageToggle';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import {
   Sheet,
   SheetClose,
@@ -16,8 +26,9 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
+import { useAuth } from '@/context/AuthContext';
 import { useI18n } from '@/context/I18nContext';
-import { cn } from '@/lib/utils';
+import { cn, getInitials } from '@/lib/utils';
 
 const NAV_LINKS = [
   { key: 'home', href: '/' },
@@ -32,6 +43,8 @@ interface HeaderProps {
 
 export default function Header({ forceScrolled = false }: HeaderProps) {
   const { t } = useI18n();
+  const { user, logout } = useAuth();
+
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hasScrolled, setHasScrolled] = useState(false);
@@ -46,6 +59,9 @@ export default function Header({ forceScrolled = false }: HeaderProps) {
 
   const isLinkActive = (href: string) =>
     href === '/' ? pathname === '/' : pathname.startsWith(href);
+
+  const dashboardHref =
+    user?.role === 'admin' ? '/admin' : user?.role === 'staff' ? '/staff' : null;
 
   return (
     <header
@@ -92,18 +108,69 @@ export default function Header({ forceScrolled = false }: HeaderProps) {
         <div className="flex hidden w-[250px] items-center justify-end gap-3 md:flex">
           <LanguageToggle isScrolled={isScrolled} />
 
-          <Link
-            href="/sign-in"
-            className={cn(
-              'flex items-center gap-1.5 rounded-full border px-4 py-1.5 text-sm font-medium tracking-wide transition-colors',
-              isScrolled
-                ? 'border-primary text-primary hover:bg-primary hover:text-primary-foreground'
-                : 'border-white text-white hover:bg-white hover:text-gray-900',
-            )}
-          >
-            <LogIn className="size-4" />
-            {t('header.signIn')}
-          </Link>
+          {user ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger
+                render={
+                  <button
+                    type="button"
+                    className="flex items-center gap-2 rounded-full transition"
+                    aria-label={t('header.dropdown.accountMenu')}
+                  >
+                    <Avatar size="default">
+                      <AvatarFallback className="bg-primary text-primary-foreground text-xs font-semibold">
+                        {getInitials(user.full_name)}
+                      </AvatarFallback>
+                    </Avatar>
+                  </button>
+                }
+              />
+
+              <DropdownMenuContent align="end" className="w-52">
+                <DropdownMenuGroup>
+                  <DropdownMenuLabel className="font-normal">
+                    <div className="flex flex-col gap-0.5">
+                      <p className="text-sm font-semibold">{user.full_name}</p>
+                      <p className="text-muted-foreground text-xs capitalize">{user.role}</p>
+                    </div>
+                  </DropdownMenuLabel>
+
+                  <DropdownMenuSeparator />
+
+                  {dashboardHref && (
+                    <DropdownMenuItem render={<Link href={dashboardHref} />}>
+                      {t('header.dropdown.dashboard')}
+                    </DropdownMenuItem>
+                  )}
+
+                  <DropdownMenuItem render={<Link href="/profile" />}>
+                    {t('header.dropdown.profile')}
+                  </DropdownMenuItem>
+                </DropdownMenuGroup>
+
+                <DropdownMenuSeparator />
+
+                <DropdownMenuGroup>
+                  <DropdownMenuItem variant="destructive" onClick={logout}>
+                    {t('header.dropdown.signOut')}
+                  </DropdownMenuItem>
+                </DropdownMenuGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <Link
+              href="/signin"
+              className={cn(
+                'flex items-center gap-1.5 rounded-full border px-4 py-1.5 text-sm font-medium tracking-wide transition-colors',
+                isScrolled
+                  ? 'border-primary text-primary hover:bg-primary hover:text-primary-foreground'
+                  : 'border-white text-white hover:bg-white hover:text-gray-900',
+              )}
+            >
+              <LogIn className="size-4" />
+              {t('header.signIn')}
+            </Link>
+          )}
         </div>
 
         <div className="flex items-center gap-2 md:hidden">
@@ -146,18 +213,67 @@ export default function Header({ forceScrolled = false }: HeaderProps) {
               </nav>
 
               <SheetFooter>
-                <SheetClose
-                  nativeButton={false}
-                  render={
-                    <Link
-                      href="/sign-in"
-                      className="border-primary text-primary hover:bg-primary hover:text-primary-foreground flex items-center justify-center gap-1.5 rounded-full border px-4 py-2 text-sm font-medium tracking-wide transition-colors"
-                    />
-                  }
-                >
-                  <LogIn className="size-4" />
-                  {t('header.signIn')}
-                </SheetClose>
+                {user ? (
+                  <div className="flex flex-col gap-2">
+                    <div className="flex items-center gap-3 px-1 pb-1">
+                      <Avatar size="sm">
+                        <AvatarFallback className="bg-primary text-primary-foreground text-xs font-semibold">
+                          {getInitials(user.full_name)}
+                        </AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <p className="text-sm font-semibold text-gray-900">{user.full_name}</p>
+                        <p className="text-muted-foreground text-xs capitalize">{user.role}</p>
+                      </div>
+                    </div>
+
+                    {dashboardHref && (
+                      <SheetClose
+                        nativeButton={false}
+                        render={
+                          <Link
+                            href={dashboardHref}
+                            className="text-sm font-medium tracking-wide text-gray-700"
+                          />
+                        }
+                      >
+                        {t('header.dropdown.dashboard')}
+                      </SheetClose>
+                    )}
+
+                    <SheetClose
+                      nativeButton={false}
+                      render={
+                        <Link
+                          href="/profile"
+                          className="text-sm font-medium tracking-wide text-gray-700"
+                        />
+                      }
+                    >
+                      {t('header.dropdown.profile')}
+                    </SheetClose>
+
+                    <SheetClose
+                      onClick={logout}
+                      className="text-destructive border-destructive/30 hover:bg-destructive/10 flex items-center justify-center gap-1.5 rounded-full border px-4 py-2 text-sm font-medium tracking-wide transition-colors"
+                    >
+                      {t('header.dropdown.signOut')}
+                    </SheetClose>
+                  </div>
+                ) : (
+                  <SheetClose
+                    nativeButton={false}
+                    render={
+                      <Link
+                        href="/signin"
+                        className="border-primary text-primary hover:bg-primary hover:text-primary-foreground flex items-center justify-center gap-1.5 rounded-full border px-4 py-2 text-sm font-medium tracking-wide transition-colors"
+                      />
+                    }
+                  >
+                    <LogIn className="size-4" />
+                    {t('header.signIn')}
+                  </SheetClose>
+                )}
               </SheetFooter>
             </SheetContent>
           </Sheet>

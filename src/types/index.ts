@@ -57,3 +57,14 @@ export interface Pagination {
   total_items: number;
   total_pages: number;
 }
+
+export type UserStatusEnum = 'active' | 'inactive' | 'banned';
+export type UserRoleEnum = 'admin' | 'staff' | 'customer';
+export type UserGenderEnum = 'male' | 'female' | 'other';
+
+export interface UserItem {
+  id: string;
+  full_name: string;
+  role: UserRoleEnum;
+  status: UserStatusEnum;
+}
