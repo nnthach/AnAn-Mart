@@ -5,13 +5,23 @@ import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
 import { useI18n } from '@/context/I18nContext';
+import { useInView } from '@/hooks/useInView';
+import { cn } from '@/lib/utils';
 
 export function GiftBanner() {
   const { t } = useI18n();
+  const { ref, inView } = useInView<HTMLDivElement>();
 
   return (
     <section className="mx-auto max-w-7xl px-4 md:px-8">
-      <div className="from-primary relative flex flex-col items-center gap-4 overflow-hidden rounded-2xl bg-linear-to-r to-red-800 px-6 py-8 text-center sm:flex-row sm:justify-between sm:text-left md:px-10">
+      <div
+        ref={ref}
+        className={cn(
+          'from-primary relative flex flex-col items-center gap-4 overflow-hidden rounded-2xl bg-linear-to-r to-red-800 px-6 py-8 text-center sm:flex-row sm:justify-between sm:text-left md:px-10',
+          !inView && 'opacity-0',
+          inView && 'animate-fadeInUp',
+        )}
+      >
         <Gift className="absolute -top-6 -left-6 size-32 text-white/10" strokeWidth={1} />
 
         <div className="relative flex flex-col items-center gap-3 sm:flex-row sm:items-center">

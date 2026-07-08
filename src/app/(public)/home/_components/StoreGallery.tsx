@@ -5,9 +5,12 @@ import Image from 'next/image';
 
 import LocationMap from '@/components/features/LocationMap';
 import { useI18n } from '@/context/I18nContext';
+import { useInView } from '@/hooks/useInView';
+import { cn } from '@/lib/utils';
 
 export function StoreGallery() {
   const { t } = useI18n();
+  const { ref, inView } = useInView<HTMLDivElement>();
 
   const STORE_INFO = [
     { icon: MapPin, label: '191 Lý Thường Kiệt,\nHội An, Quảng Nam, Vietnam' },
@@ -18,8 +21,14 @@ export function StoreGallery() {
 
   return (
     <section className="mx-auto max-w-7xl px-4 pb-12 md:px-8">
-      <div className="grid lg:grid-cols-2">
-        <div className="grid h-100 grid-cols-[minmax(220px,260px)_1fr] overflow-hidden rounded-t-2xl shadow-sm lg:rounded-tl-2xl lg:rounded-tr-none lg:rounded-bl-2xl">
+      <div ref={ref} className="grid lg:grid-cols-2">
+        <div
+          className={cn(
+            'grid h-100 grid-cols-[minmax(220px,260px)_1fr] overflow-hidden rounded-t-2xl shadow-sm lg:rounded-tl-2xl lg:rounded-tr-none lg:rounded-bl-2xl',
+            !inView && 'opacity-0',
+            inView && 'animate-fadeInLeft',
+          )}
+        >
           <div className="bg-primary flex h-full flex-col justify-center gap-4 p-6 text-white">
             <h2 className="font-heading text-lg font-bold tracking-wide uppercase">
               {t('homepage.storeGallery.visitOurStore')}
@@ -45,7 +54,14 @@ export function StoreGallery() {
           </div>
         </div>
 
-        <div className="h-100 overflow-hidden rounded-b-2xl shadow-sm lg:rounded-tr-2xl lg:rounded-br-2xl lg:rounded-bl-none">
+        <div
+          className={cn(
+            'h-100 overflow-hidden rounded-b-2xl shadow-sm lg:rounded-tr-2xl lg:rounded-br-2xl lg:rounded-bl-none',
+            !inView && 'opacity-0',
+            inView && 'animate-fadeInRight',
+          )}
+          style={inView ? { animationDelay: '0.15s' } : undefined}
+        >
           <LocationMap />
         </div>
       </div>

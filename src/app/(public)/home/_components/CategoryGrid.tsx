@@ -4,6 +4,8 @@ import { Beer, Candy, Coffee, CupSoda, Gift, GlassWater, ShoppingBag, Wine } fro
 import Image from 'next/image';
 
 import { useI18n } from '@/context/I18nContext';
+import { useInView } from '@/hooks/useInView';
+import { cn } from '@/lib/utils';
 
 const CATEGORIES = [
   { key: 'premiumWines', icon: Wine, image: '/images/one-stop/premium-wine.jpg' },
@@ -18,6 +20,7 @@ const CATEGORIES = [
 
 export function CategoryGrid() {
   const { t } = useI18n();
+  const { ref, inView } = useInView<HTMLDivElement>();
 
   return (
     <section className="mx-auto max-w-7xl px-4 pt-12 md:px-8">
@@ -29,14 +32,19 @@ export function CategoryGrid() {
         <span className="via-primary h-px w-10 bg-linear-to-r from-transparent to-transparent" />
       </div>
 
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 lg:grid-cols-8">
-        {CATEGORIES.map(({ key, icon: Icon, image }) => {
+      <div ref={ref} className="grid grid-cols-2 gap-4 sm:grid-cols-4 lg:grid-cols-8">
+        {CATEGORIES.map(({ key, icon: Icon, image }, index) => {
           const title = t(`homepage.categoryGrid.categories.${key}.title`);
 
           return (
             <div
               key={key}
-              className="border-border group overflow-hidden rounded-2xl border bg-white text-center shadow-sm transition-shadow hover:shadow-md"
+              className={cn(
+                'border-border group overflow-hidden rounded-2xl border bg-white text-center shadow-sm transition-shadow hover:shadow-md',
+                !inView && 'opacity-0',
+                inView && 'animate-fadeUp',
+              )}
+              style={inView ? { animationDelay: `${index * 0.08}s` } : undefined}
             >
               <div className="relative aspect-square w-full overflow-hidden">
                 <Image

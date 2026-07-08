@@ -3,6 +3,8 @@
 import { BadgeCheck, CreditCard, Gift, Headset, ShoppingBag, Truck } from 'lucide-react';
 
 import { useI18n } from '@/context/I18nContext';
+import { useInView } from '@/hooks/useInView';
+import { cn } from '@/lib/utils';
 
 const FEATURES = [
   { key: 'wideSelection', icon: Gift },
@@ -15,6 +17,7 @@ const FEATURES = [
 
 export function WhyChooseUs() {
   const { t } = useI18n();
+  const { ref, inView } = useInView<HTMLDivElement>();
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-12 md:px-8">
@@ -27,9 +30,17 @@ export function WhyChooseUs() {
           <span className="via-primary h-px w-10 bg-linear-to-r from-transparent to-transparent" />
         </div>
 
-        <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-6">
-          {FEATURES.map(({ key, icon: Icon }) => (
-            <div key={key} className="flex flex-col items-center text-center">
+        <div ref={ref} className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-6">
+          {FEATURES.map(({ key, icon: Icon }, index) => (
+            <div
+              key={key}
+              className={cn(
+                'flex flex-col items-center text-center',
+                !inView && 'opacity-0',
+                inView && 'animate-scaleIn',
+              )}
+              style={inView ? { animationDelay: `${index * 0.08}s` } : undefined}
+            >
               <span className="border-primary text-primary mb-3 flex size-12 items-center justify-center rounded-full border-2">
                 <Icon className="size-5" strokeWidth={1.5} />
               </span>

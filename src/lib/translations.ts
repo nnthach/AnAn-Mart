@@ -180,6 +180,14 @@ export const translations = {
       },
       relatedProducts: 'You May Also Like',
     },
+    profilePage: {
+      badge: 'Coming Soon',
+      title: 'Your Profile Is Almost Ready',
+      description:
+        "We're building out account management — order history, saved details, and more. Check back soon!",
+      backHome: 'Back to Home',
+      continueShopping: 'Continue Shopping',
+    },
     admin: {
       brand: {
         name: 'An An Mart',
@@ -326,6 +334,32 @@ export const translations = {
             priceRequired: 'Price must be greater than 0.',
             categoryRequired: 'Please select a category.',
           },
+        },
+      },
+      ordersPage: {
+        headerTitle: {
+          title: 'Orders',
+          subtitle: 'Track and manage customer orders.',
+        },
+        table: {
+          columns: {
+            orderCode: 'Order',
+            customer: 'Customer',
+            items: 'Items',
+            total: 'Total',
+            payment: 'Payment',
+          },
+        },
+        status: {
+          pending: 'Pending',
+          processing: 'Processing',
+          shipping: 'Shipping',
+          completed: 'Completed',
+          cancelled: 'Cancelled',
+        },
+        payment: {
+          paid: 'Paid',
+          unpaid: 'Unpaid',
         },
       },
       categoriesPage: {
@@ -629,6 +663,14 @@ export const translations = {
       },
       relatedProducts: 'Có Thể Bạn Cũng Thích',
     },
+    profilePage: {
+      badge: 'Sắp Ra Mắt',
+      title: 'Trang Cá Nhân Đang Được Hoàn Thiện',
+      description:
+        'Chúng tôi đang xây dựng tính năng quản lý tài khoản — lịch sử đơn hàng, thông tin đã lưu và nhiều hơn nữa. Quay lại sau nhé!',
+      backHome: 'Về Trang Chủ',
+      continueShopping: 'Tiếp Tục Mua Sắm',
+    },
     admin: {
       brand: {
         name: 'An An Mart',
@@ -775,6 +817,32 @@ export const translations = {
             priceRequired: 'Giá phải lớn hơn 0.',
             categoryRequired: 'Vui lòng chọn danh mục.',
           },
+        },
+      },
+      ordersPage: {
+        headerTitle: {
+          title: 'Đơn Hàng',
+          subtitle: 'Theo dõi và quản lý đơn hàng của khách.',
+        },
+        table: {
+          columns: {
+            orderCode: 'Đơn Hàng',
+            customer: 'Khách Hàng',
+            items: 'Số Lượng',
+            total: 'Tổng Tiền',
+            payment: 'Thanh Toán',
+          },
+        },
+        status: {
+          pending: 'Chờ Xử Lý',
+          processing: 'Đang Xử Lý',
+          shipping: 'Đang Giao',
+          completed: 'Hoàn Thành',
+          cancelled: 'Đã Hủy',
+        },
+        payment: {
+          paid: 'Đã Thanh Toán',
+          unpaid: 'Chưa Thanh Toán',
         },
       },
       categoriesPage: {

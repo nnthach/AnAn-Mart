@@ -88,36 +88,47 @@ export const authService = {
   },
 
   async getCurrentUser() {
-    const supabase = await createSupabaseServerClient();
+    try {
+      const supabase = await createSupabaseServerClient();
 
-    const {
-      data: { user: authUser },
-      error,
-    } = await supabase.auth.getUser();
+      const {
+        data: { user: authUser },
+        error,
+      } = await supabase.auth.getUser();
 
-    if (error || !authUser) {
-      throw new Error('UNAUTHORIZED');
+      if (error || !authUser) {
+        if (
+          error?.code !== 'refresh_token_not_found' &&
+          error?.message !== 'Auth session missing!'
+        ) {
+          console.error('getUser error:', error?.message);
+        }
+        return null;
+      }
+
+      const userProfile = await getUserProfileById(authUser.id);
+
+      if (!userProfile) {
+        return null;
+      }
+
+      if (userProfile.status === 'banned' || userProfile.status === 'inactive') {
+        return null;
+      }
+
+      const isStaff = userProfile.role === 'staff';
+
+      return {
+        id: userProfile.id,
+        email: authUser.email ?? '',
+        full_name: userProfile.full_name,
+        role: userProfile.role,
+        status: userProfile.status,
+        ...(isStaff && { staff: userProfile.staffs?.[0] ?? null }),
+      };
+    } catch (error) {
+      console.error('getCurrentUser unexpected error:', error);
+      return null;
     }
-
-    const userProfile = await getUserProfileById(authUser.id);
-
-    if (!userProfile) {
-      throw new Error('PROFILE_NOT_FOUND');
-    }
-
-    if (userProfile.status === 'banned' || userProfile.status === 'inactive') {
-      throw new Error('ACCOUNT_NOT_ACTIVE');
-    }
-
-    const isStaff = userProfile.role === 'staff';
-
-    return {
-      id: userProfile.id,
-      email: authUser.email ?? '',
-      full_name: userProfile.full_name,
-      role: userProfile.role,
-      status: userProfile.status,
-      ...(isStaff && { staff: userProfile.staffs?.[0] ?? null }),
-    };
   },
 };

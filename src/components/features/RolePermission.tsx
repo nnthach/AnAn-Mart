@@ -1,9 +1,6 @@
-'use client';
+import { redirect } from 'next/navigation';
 
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
-
-import { useAuth } from '@/context/AuthContext';
+import { authService } from '@/server/services/auth';
 import type { UserRoleEnum } from '@/types';
 
 const ROLE_HOME_PATH: Record<UserRoleEnum, string> = {
@@ -12,29 +9,25 @@ const ROLE_HOME_PATH: Record<UserRoleEnum, string> = {
   customer: '/',
 };
 
-interface RolePermissionProps {
+function isValidRole(role: string): role is UserRoleEnum {
+  return role === 'admin' || role === 'staff' || role === 'customer';
+}
+
+interface Props {
   allowedRoles: UserRoleEnum[];
   children: React.ReactNode;
 }
 
-export const RolePermission: React.FC<RolePermissionProps> = ({ allowedRoles, children }) => {
-  const { user } = useAuth();
-  const router = useRouter();
+export async function RolePermission({ allowedRoles, children }: Props) {
+  const user = await authService.getCurrentUser();
 
-  const hasPermission = !!user && allowedRoles.includes(user.role);
+  if (!user) {
+    redirect('/signin');
+  }
 
-  useEffect(() => {
-    if (!user) {
-      router.replace('/');
-      return;
-    }
-
-    if (!hasPermission) {
-      router.replace(ROLE_HOME_PATH[user.role] ?? '/');
-    }
-  }, [user, hasPermission, router]);
-
-  if (!hasPermission) return null;
+  if (!isValidRole(user.role) || !allowedRoles.includes(user.role)) {
+    redirect(isValidRole(user.role) ? (ROLE_HOME_PATH[user.role] ?? '/') : '/');
+  }
 
   return <>{children}</>;
-};
+}

@@ -5,6 +5,8 @@ import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
 import { useI18n } from '@/context/I18nContext';
+import { useInView } from '@/hooks/useInView';
+import { cn } from '@/lib/utils';
 
 const COLLECTIONS = [
   { key: 'wine', image: '/images/feature/wine.jpg', categorySlug: 'wine' },
@@ -15,6 +17,7 @@ const COLLECTIONS = [
 
 export function FeaturedCollections() {
   const { t } = useI18n();
+  const { ref, inView } = useInView<HTMLDivElement>();
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-12 md:px-8">
@@ -26,14 +29,19 @@ export function FeaturedCollections() {
         <span className="via-primary h-px w-10 bg-linear-to-r from-transparent to-transparent" />
       </div>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {COLLECTIONS.map(({ key, image, categorySlug }) => {
+      <div ref={ref} className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {COLLECTIONS.map(({ key, image, categorySlug }, index) => {
           const title = t(`homepage.featuredCollections.collections.${key}.title`);
 
           return (
             <div
               key={key}
-              className="relative flex aspect-3/2 items-end overflow-hidden rounded-2xl"
+              className={cn(
+                'relative flex aspect-3/2 items-end overflow-hidden rounded-2xl',
+                !inView && 'opacity-0',
+                inView && 'animate-scaleIn',
+              )}
+              style={inView ? { animationDelay: `${index * 0.1}s` } : undefined}
             >
               <Image
                 src={image}
@@ -51,13 +59,11 @@ export function FeaturedCollections() {
                 <p className="mt-1 max-w-[18ch] text-xs text-white/75">
                   {t(`homepage.featuredCollections.collections.${key}.description`)}
                 </p>
-                <Button
-                  size="sm"
-                  className="mt-4 w-fit rounded-full px-4"
-                  render={<Link href={`/shop?category=${categorySlug}`} />}
-                >
-                  {t('homepage.featuredCollections.shopNow')}
-                </Button>
+                <Link href={`/shop?category=${categorySlug}`}>
+                  <Button size="sm" className="mt-4 w-fit rounded-full px-4">
+                    {t('homepage.featuredCollections.shopNow')}
+                  </Button>
+                </Link>
               </div>
             </div>
           );

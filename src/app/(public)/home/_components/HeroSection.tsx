@@ -6,6 +6,8 @@ import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
 import { useI18n } from '@/context/I18nContext';
+import { useInView } from '@/hooks/useInView';
+import { cn } from '@/lib/utils';
 
 const TRUST_BADGES = [
   { key: 'fastDelivery', icon: Truck },
@@ -15,10 +17,11 @@ const TRUST_BADGES = [
 
 export function HeroSection() {
   const { t } = useI18n();
+  const { ref, inView } = useInView<HTMLDivElement>();
 
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden">
-      <div className="absolute inset-0">
+      <div className="animate-imageFade absolute inset-0">
         <Image
           src="/images/banner.png"
           alt="An An Mart — premium wines, spirits and Hoi An gifts"
@@ -30,7 +33,14 @@ export function HeroSection() {
         <div className="absolute inset-0 bg-black/60" />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-2xl px-4 py-24 text-center md:px-8">
+      <div
+        ref={ref}
+        className={cn(
+          'relative z-10 mx-auto max-w-2xl px-4 py-24 text-center md:px-8',
+          !inView && 'opacity-0',
+          inView && 'animate-fadeInUp',
+        )}
+      >
         <p className="font-heading text-3xl leading-tight font-medium text-white italic sm:text-4xl">
           {t('homepage.hero.eyebrow')}
         </p>
@@ -63,8 +73,12 @@ export function HeroSection() {
         </div>
 
         <dl className="mt-10 grid grid-cols-3 gap-4">
-          {TRUST_BADGES.map(({ key, icon: Icon }) => (
-            <div key={key} className="flex flex-col items-center gap-1">
+          {TRUST_BADGES.map(({ key, icon: Icon }, index) => (
+            <div
+              key={key}
+              className={cn('flex flex-col items-center gap-1', inView && 'animate-fadeUp')}
+              style={inView ? { animationDelay: `${0.3 + index * 0.1}s` } : undefined}
+            >
               <Icon className="size-5 text-red-400" />
               <dt className="text-xs font-semibold text-white sm:text-sm">
                 {t(`homepage.hero.trustBadges.${key}.title`)}
