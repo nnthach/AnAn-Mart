@@ -9,51 +9,93 @@ import { Input } from '@/components/ui/input';
 import { Popover, PopoverClose, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { useI18n } from '@/context/I18nContext';
 import { useDebounce } from '@/hooks/useDebounce';
+import { listCategoriesAction } from '@/server/actions/categories';
+import type { CategoryItem } from '@/types';
 
 const DEFAULT_LIMIT = 8;
 
 const LIMIT_OPTIONS = [DEFAULT_LIMIT, 10, 15, 20, 50];
 
+type SortBy = 'created_at' | 'price';
+type Order = 'asc' | 'desc';
+
 interface FilterState {
   is_active: boolean | undefined;
-  order: 'asc' | 'desc';
+  category_slug: string | undefined;
+  sort_by: SortBy;
+  order: Order;
   limit: number;
 }
 
 const DEFAULT_FILTER: FilterState = {
   is_active: undefined,
+  category_slug: undefined,
+  sort_by: 'created_at',
   order: 'desc',
   limit: DEFAULT_LIMIT,
 };
 
+const ORDER_OPTIONS: Array<{ value: string; sort_by: SortBy; order: Order; labelKey: string }> = [
+  { value: 'created_desc', sort_by: 'created_at', order: 'desc', labelKey: 'orderDesc' },
+  { value: 'created_asc', sort_by: 'created_at', order: 'asc', labelKey: 'orderAsc' },
+  { value: 'price_asc', sort_by: 'price', order: 'asc', labelKey: 'orderPriceAsc' },
+  { value: 'price_desc', sort_by: 'price', order: 'desc', labelKey: 'orderPriceDesc' },
+];
+
+function toOrderValue(sortBy: SortBy, order: Order): string {
+  return ORDER_OPTIONS.find((option) => option.sort_by === sortBy && option.order === order)!.value;
+}
+
 function getFilterFromSearchParams(searchParams: URLSearchParams): FilterState {
   const isActiveParam = searchParams.get('is_active');
+  const categorySlugParam = searchParams.get('category_slug');
+  const sortByParam = searchParams.get('sort_by');
   const orderParam = searchParams.get('order');
   const limitParam = searchParams.get('limit');
 
   return {
     is_active: isActiveParam === null ? undefined : isActiveParam === 'true',
+    category_slug: categorySlugParam ?? undefined,
+    sort_by: sortByParam === 'price' ? 'price' : DEFAULT_FILTER.sort_by,
     order: orderParam === 'asc' ? 'asc' : DEFAULT_FILTER.order,
     limit: limitParam ? Number(limitParam) || DEFAULT_LIMIT : DEFAULT_LIMIT,
   };
 }
 
 export default function ProductFilter() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const router = useRouter();
   const searchParams = useSearchParams();
 
   const appliedFilter = getFilterFromSearchParams(searchParams);
   const [tempFilter, setTempFilter] = useState<FilterState>(appliedFilter);
+  const [categories, setCategories] = useState<CategoryItem[]>([]);
 
   const [search, setSearch] = useState(searchParams.get('search') ?? '');
   const debouncedSearch = useDebounce(search, 500);
   const isFirstRender = useRef(true);
 
+  const fetchCategories = async () => {
+    const result = await listCategoriesAction({
+      is_active: true,
+      sort_by: 'name',
+      order: 'asc',
+      limit: 100,
+    });
+    if (result.success) setCategories(result.data);
+    else console.error(result.error);
+  };
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
   const pushParams = (filter: FilterState, searchValue: string) => {
     const params = new URLSearchParams();
 
     if (filter.is_active !== undefined) params.set('is_active', String(filter.is_active));
+    if (filter.category_slug) params.set('category_slug', filter.category_slug);
+    if (filter.sort_by !== DEFAULT_FILTER.sort_by) params.set('sort_by', filter.sort_by);
     if (filter.order !== DEFAULT_FILTER.order) params.set('order', filter.order);
     if (filter.limit !== DEFAULT_FILTER.limit) params.set('limit', String(filter.limit));
     if (searchValue) params.set('search', searchValue);
@@ -81,12 +123,17 @@ export default function ProductFilter() {
 
   const isFilterActive =
     appliedFilter.is_active !== undefined ||
+    appliedFilter.category_slug !== undefined ||
+    appliedFilter.sort_by !== DEFAULT_FILTER.sort_by ||
     appliedFilter.order !== DEFAULT_FILTER.order ||
     appliedFilter.limit !== DEFAULT_FILTER.limit;
 
   const activeFilterCount =
     (appliedFilter.is_active !== undefined ? 1 : 0) +
-    (appliedFilter.order !== DEFAULT_FILTER.order ? 1 : 0) +
+    (appliedFilter.category_slug !== undefined ? 1 : 0) +
+    (appliedFilter.sort_by !== DEFAULT_FILTER.sort_by || appliedFilter.order !== DEFAULT_FILTER.order
+      ? 1
+      : 0) +
     (appliedFilter.limit !== DEFAULT_FILTER.limit ? 1 : 0);
 
   return (
@@ -126,20 +173,50 @@ export default function ProductFilter() {
 
             <div className="grid gap-2">
               <p className="text-sm leading-none font-medium">
+                {t('admin.productsPage.filters.categoryLabel')}
+              </p>
+              <select
+                className="h-9 w-full rounded-md border px-2 text-sm"
+                value={tempFilter.category_slug ?? ''}
+                onChange={(event) => {
+                  const value = event.target.value;
+                  setTempFilter((prev) => ({
+                    ...prev,
+                    category_slug: value === '' ? undefined : value,
+                  }));
+                }}
+              >
+                <option value="">{t('admin.productsPage.filters.categoryAll')}</option>
+                {categories.map((category) => (
+                  <option key={category.id} value={category.slug[locale]}>
+                    {category.name[locale]}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="grid gap-2">
+              <p className="text-sm leading-none font-medium">
                 {t('admin.productsPage.filters.orderLabel')}
               </p>
               <select
                 className="h-9 w-full rounded-md border px-2 text-sm"
-                value={tempFilter.order}
-                onChange={(event) =>
+                value={toOrderValue(tempFilter.sort_by, tempFilter.order)}
+                onChange={(event) => {
+                  const option = ORDER_OPTIONS.find((item) => item.value === event.target.value);
+                  if (!option) return;
                   setTempFilter((prev) => ({
                     ...prev,
-                    order: event.target.value as FilterState['order'],
-                  }))
-                }
+                    sort_by: option.sort_by,
+                    order: option.order,
+                  }));
+                }}
               >
-                <option value="desc">{t('admin.productsPage.filters.orderDesc')}</option>
-                <option value="asc">{t('admin.productsPage.filters.orderAsc')}</option>
+                {ORDER_OPTIONS.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {t(`admin.productsPage.filters.${option.labelKey}`)}
+                  </option>
+                ))}
               </select>
             </div>
 

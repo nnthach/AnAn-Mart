@@ -10,7 +10,6 @@ import InputFormField from '@/components/features/InputFormField';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogFooter,
   DialogHeader,
@@ -166,7 +165,7 @@ export default function UpdateProductModal({
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <div className="custom-scrollbar max-h-[60vh] space-y-4 overflow-y-auto py-2 pr-1">
             <div className="space-y-1.5">
-              <label className="text-foreground text-sm font-medium">
+              <label className="text-foreground mb-1.5 flex text-sm font-medium">
                 {t('admin.modal.image')}
               </label>
               <input
@@ -280,11 +279,6 @@ export default function UpdateProductModal({
           </div>
 
           <DialogFooter className="mt-4 gap-2">
-            <DialogClose
-              render={<Button type="button" variant="outline" disabled={isSubmitting} />}
-            >
-              {t('admin.modal.cancel')}
-            </DialogClose>
             <Button type="submit" disabled={isSubmitting} className="min-w-24">
               {isSubmitting ? (
                 <Loader2 className="h-4 w-4 animate-spin" />

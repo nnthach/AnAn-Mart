@@ -14,6 +14,8 @@ export default async function AdminProductPage({ searchParams }: AdminProductPag
 
   const { data, pagination } = await getProducts({
     is_active: params.is_active === undefined ? undefined : params.is_active === 'true',
+    category_slug: typeof params.category_slug === 'string' ? params.category_slug : undefined,
+    sort_by: params.sort_by === 'price' ? 'price' : 'created_at',
     order: (params.order as 'asc' | 'desc') ?? 'desc',
     page: Number(params.page) || 1,
     limit: Number(params.limit) || DEFAULT_LIMIT,

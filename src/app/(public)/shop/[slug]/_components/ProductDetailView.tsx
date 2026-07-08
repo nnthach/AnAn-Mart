@@ -98,7 +98,10 @@ export function ProductDetailView({ product }: ProductDetailViewProps) {
             {relatedProducts.map((relatedProduct) => (
               <ProductCard
                 key={relatedProduct.id}
-                product={relatedProduct}
+                href={`/shop/${relatedProduct.id}`}
+                image={relatedProduct.image}
+                name={relatedProduct.name}
+                price={relatedProduct.price}
                 categoryLabel={categoryLabel}
                 addToCartLabel={t('shopPage.addToCart')}
               />

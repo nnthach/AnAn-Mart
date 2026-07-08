@@ -6,6 +6,7 @@ import type { ProductItem } from '@/types';
 export interface GetProductsParams {
   is_active?: boolean;
   category_id?: string;
+  category_slug?: string;
   sort_by?: 'created_at' | 'price';
   order?: 'asc' | 'desc';
   page?: number;
@@ -51,18 +52,7 @@ interface ProductRow {
   product_translations: ProductTranslationRow[];
 }
 
-const PRODUCT_SELECT = `
-  id,
-  price,
-  image_urls,
-  category_id,
-  is_active,
-  created_at,
-  updated_at,
-  category:categories(id, name),
-  product_translations(locale, name, description, slug)
-`;
-
+// format
 function mapProductRow(row: ProductRow): ProductItem {
   const findTranslation = (locale: 'vi' | 'en') =>
     row.product_translations.find((item) => item.locale === locale);
@@ -88,7 +78,19 @@ function mapProductRow(row: ProductRow): ProductItem {
 export async function getProductById(id: string): Promise<ProductItem> {
   const { data, error } = await supabaseAdmin
     .from('products')
-    .select(PRODUCT_SELECT)
+    .select(
+      `
+        id,
+        price,
+        image_urls,
+        category_id,
+        is_active,
+        created_at,
+        updated_at,
+        category:categories(id, name),
+        product_translations(locale, name, description, slug)
+      `,
+    )
     .eq('id', id)
     .single();
 
@@ -100,6 +102,7 @@ export async function getProducts(params: GetProductsParams = {}) {
   const {
     is_active,
     category_id,
+    category_slug,
     sort_by = 'created_at',
     order = 'desc',
     page = 1,
@@ -124,7 +127,7 @@ export async function getProducts(params: GetProductsParams = {}) {
       is_active,
       created_at,
       updated_at,
-      category:categories(id, name),
+      category:categories!inner(id, name),
       product_translations!inner(locale, name, description, slug)
     `,
       { count: 'exact' },
@@ -138,6 +141,13 @@ export async function getProducts(params: GetProductsParams = {}) {
 
   if (category_id) {
     query = query.eq('category_id', category_id);
+  } else if (category_slug) {
+    const safeSlug = category_slug.replace(/[^a-z0-9-]/g, '');
+    if (safeSlug) {
+      query = query.or(`slug->>vi.eq.${safeSlug},slug->>en.eq.${safeSlug}`, {
+        referencedTable: 'category',
+      });
+    }
   }
 
   if (search) {

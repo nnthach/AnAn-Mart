@@ -2,42 +2,51 @@ import { ShoppingCart } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { formatPrice, type Product } from '@/app/(public)/shop/_lib/products';
+import { formatPrice } from '@/app/(public)/shop/_lib/products';
 
 interface ProductCardProps {
-  product: Product;
+  href: string;
+  image: string;
+  name: string;
+  price: number;
   categoryLabel: string;
   addToCartLabel: string;
 }
 
-export function ProductCard({ product, categoryLabel, addToCartLabel }: ProductCardProps) {
+export function ProductCard({
+  href,
+  image,
+  name,
+  price,
+  categoryLabel,
+  addToCartLabel,
+}: ProductCardProps) {
   return (
     <article className="border-border group flex flex-col overflow-hidden rounded-xl border bg-white transition-shadow hover:shadow-lg">
-      <Link
-        href={`/shop/${product.id}`}
-        className="relative aspect-square overflow-hidden bg-gray-100"
-      >
+      <Link href={href} className="relative aspect-square overflow-hidden bg-gray-100">
         <Image
-          src={product.image}
-          alt={product.name}
+          src={image}
+          alt={name}
           fill
           sizes="(min-width: 1024px) 22vw, (min-width: 640px) 33vw, 50vw"
           className="object-cover transition-transform duration-300 group-hover:scale-105"
         />
-        <span className="bg-primary absolute top-3 left-3 rounded-md px-2 py-1 text-[10px] font-semibold tracking-wide text-white uppercase">
-          {categoryLabel}
-        </span>
+        {categoryLabel && (
+          <span className="bg-primary absolute top-3 left-3 rounded-md px-2 py-1 text-[10px] font-semibold tracking-wide text-white uppercase">
+            {categoryLabel}
+          </span>
+        )}
       </Link>
 
       <div className="flex flex-1 flex-col gap-2 p-4">
         <h3 className="line-clamp-2 text-sm font-semibold text-gray-900">
-          <Link href={`/shop/${product.id}`} className="hover:text-primary">
-            {product.name}
+          <Link href={href} className="hover:text-primary">
+            {name}
           </Link>
         </h3>
 
         <div className="mt-auto flex items-center justify-between gap-2 pt-1">
-          <span className="text-primary text-base font-bold">{formatPrice(product.price)}</span>
+          <span className="text-primary text-base font-bold">{formatPrice(price)}</span>
           <button
             type="button"
             aria-label={addToCartLabel}

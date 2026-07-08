@@ -68,9 +68,7 @@ export function AdminHeader() {
         <BreadcrumbList>
           <BreadcrumbItem className="hidden md:block">
             <BreadcrumbLink
-              render={
-                <Link href="/admin/dashboard" className="text-muted-foreground hover:text-foreground" />
-              }
+              render={<Link href="/" className="text-muted-foreground hover:text-foreground" />}
             >
               {t('admin.brand.name')}
             </BreadcrumbLink>
@@ -86,7 +84,10 @@ export function AdminHeader() {
                 ) : (
                   <BreadcrumbLink
                     render={
-                      <Link href={crumb.href} className="text-muted-foreground hover:text-foreground" />
+                      <Link
+                        href={crumb.href}
+                        className="text-muted-foreground hover:text-foreground"
+                      />
                     }
                   >
                     {t(`admin.headerBreadcrumb.${crumb.label}`)}
