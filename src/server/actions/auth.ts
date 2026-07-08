@@ -2,6 +2,7 @@
 
 import { z } from 'zod';
 
+import { createSupabaseServerClient } from '@/lib/db/server';
 import { authService } from '@/server/services/auth';
 
 const signInSchema = z.object({
@@ -60,5 +61,21 @@ export async function signUpAction(input: unknown): Promise<SignUpResult> {
       success: false,
       error: ERROR_MESSAGES[message] ?? 'Đăng ký thất bại, vui lòng thử lại.',
     };
+  }
+}
+
+export async function signOutAction() {
+  try {
+    const supabase = await createSupabaseServerClient();
+    const { error } = await supabase.auth.signOut();
+
+    if (error) {
+      return { success: false, error: 'Đăng xuất thất bại' };
+    }
+
+    return { success: true };
+  } catch (error) {
+    console.error('Sign out error:', error);
+    return { success: false, error: 'Đăng xuất thất bại' };
   }
 }

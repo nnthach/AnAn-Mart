@@ -114,7 +114,7 @@ export default function Header({ forceScrolled = false }: HeaderProps) {
                 render={
                   <button
                     type="button"
-                    className="flex items-center gap-2 rounded-full transition"
+                    className="flex cursor-pointer items-center gap-2 rounded-full transition"
                     aria-label={t('header.dropdown.accountMenu')}
                   >
                     <Avatar size="default">

@@ -64,6 +64,7 @@ export type UserGenderEnum = 'male' | 'female' | 'other';
 
 export interface UserItem {
   id: string;
+  email: string;
   full_name: string;
   role: UserRoleEnum;
   status: UserStatusEnum;

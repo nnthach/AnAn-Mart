@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
+import { signOutAction } from '@/server/actions/auth';
 import type { UserItem } from '@/types';
 
 import { useI18n } from './I18nContext';
@@ -39,16 +40,17 @@ export function AuthProvider({
   }, [initialUser]);
 
   const logout = async () => {
-    try {
-      await fetch('/api/auth/signout', { method: 'POST' });
-      toast.success(locale === 'vi' ? 'Đăng xuất thành công!' : 'Sign out successfully!');
-    } catch {
+    const result = await signOutAction();
+
+    if (result.success) {
+      toast.success(locale === 'vi' ? 'Đăng xuất thành công!' : 'Signed out successfully!');
+    } else {
       toast.error(locale === 'vi' ? 'Đăng xuất thất bại!' : 'Failed to sign out!');
-    } finally {
-      setUser(null);
-      router.push('/');
-      router.refresh();
     }
+
+    setUser(null);
+    router.push('/');
+    router.refresh();
   };
 
   return <AuthContext.Provider value={{ user, setUser, logout }}>{children}</AuthContext.Provider>;

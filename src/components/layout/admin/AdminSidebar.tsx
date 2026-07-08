@@ -25,8 +25,9 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from '@/components/ui/sidebar';
+import { useAuth } from '@/context/AuthContext';
 import { useI18n } from '@/context/I18nContext';
-import { cn } from '@/lib/utils';
+import { cn, getInitials } from '@/lib/utils';
 
 const NAV_MANAGEMENT = [
   { key: 'dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
@@ -90,6 +91,7 @@ function NavGroup({
 export function AdminSidebar() {
   const pathname = usePathname();
   const { t } = useI18n();
+  const { user, logout } = useAuth();
 
   return (
     <Sidebar collapsible="icon">
@@ -153,13 +155,13 @@ export function AdminSidebar() {
               >
                 <Avatar className="size-8 rounded-lg">
                   <AvatarFallback className="bg-primary/20 text-primary rounded-lg text-xs font-semibold">
-                    AD
+                    {user ? getInitials(user.full_name) : 'AD'}
                   </AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">Admin</span>
+                  <span className="truncate font-semibold">{user?.full_name ?? 'Admin'}</span>
                   <span className="text-muted-foreground truncate text-xs">
-                    admin@ananmarthoian.com
+                    {user?.email ?? ''}
                   </span>
                 </div>
                 <ChevronUp className="text-muted-foreground ml-auto h-4 w-4" />
@@ -177,7 +179,7 @@ export function AdminSidebar() {
                   <span>{t('admin.sidebar.user.account')}</span>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem variant="destructive">
+                <DropdownMenuItem variant="destructive" onClick={logout}>
                   <span>{t('admin.sidebar.user.signOut')}</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>

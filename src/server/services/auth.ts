@@ -45,6 +45,7 @@ export const authService = {
 
     return {
       id: userProfile.id,
+      email: data.user.email ?? email,
       full_name: userProfile.full_name,
       role: userProfile.role,
       status: userProfile.status,
@@ -78,6 +79,7 @@ export const authService = {
 
     return {
       id: userProfile.id,
+      email: data.user.email ?? email,
       full_name: userProfile.full_name,
       role: userProfile.role,
       status: userProfile.status,
@@ -111,6 +113,7 @@ export const authService = {
 
     return {
       id: userProfile.id,
+      email: authUser.email ?? '',
       full_name: userProfile.full_name,
       role: userProfile.role,
       status: userProfile.status,

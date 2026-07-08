@@ -26,7 +26,9 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Separator } from '@/components/ui/separator';
 import { SidebarTrigger } from '@/components/ui/sidebar';
+import { useAuth } from '@/context/AuthContext';
 import { useI18n } from '@/context/I18nContext';
+import { getInitials } from '@/lib/utils';
 
 const BREADCRUMB_MAP: Record<string, string> = {
   dashboard: 'dashboard',
@@ -57,6 +59,7 @@ function useBreadcrumbs() {
 export function AdminHeader() {
   const crumbs = useBreadcrumbs();
   const { t } = useI18n();
+  const { user, logout } = useAuth();
 
   return (
     <header className="border-border bg-background sticky top-0 z-30 flex h-14 items-center gap-2 border-b px-6 backdrop-blur-sm">
@@ -125,7 +128,7 @@ export function AdminHeader() {
           >
             <Avatar className="size-8">
               <AvatarFallback className="bg-primary/20 text-primary text-xs font-semibold">
-                AD
+                {user ? getInitials(user.full_name) : 'AD'}
               </AvatarFallback>
             </Avatar>
           </DropdownMenuTrigger>
@@ -133,15 +136,15 @@ export function AdminHeader() {
             <DropdownMenuGroup>
               <DropdownMenuLabel className="font-normal">
                 <div className="flex flex-col gap-0.5">
-                  <p className="text-sm font-semibold">Admin</p>
-                  <p className="text-muted-foreground text-xs">admin@ananmarthoian.com</p>
+                  <p className="truncate text-sm font-semibold">{user?.full_name ?? 'Admin'}</p>
+                  <p className="text-muted-foreground truncate text-xs">{user?.email ?? ''}</p>
                 </div>
               </DropdownMenuLabel>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem>{t('admin.headerDropdown.profile')}</DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem variant="destructive">
+            <DropdownMenuItem variant="destructive" onClick={logout}>
               {t('admin.headerDropdown.signOut')}
             </DropdownMenuItem>
           </DropdownMenuContent>
