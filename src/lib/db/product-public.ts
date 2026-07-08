@@ -4,12 +4,14 @@ import { supabase } from '@/lib/db/client';
 import type { ProductItem } from '@/types';
 
 export interface GetPublicProductsParams {
+  category_id?: string;
   category_slug?: string;
   sort_by?: 'created_at' | 'price';
   order?: 'asc' | 'desc';
   page?: number;
   limit?: number;
   search?: string;
+  exclude_id?: string;
 }
 
 interface ProductTranslationRow {
@@ -55,12 +57,14 @@ function mapProductRow(row: ProductRow): ProductItem {
 
 export async function getPublicProducts(params: GetPublicProductsParams = {}) {
   const {
+    category_id,
     category_slug,
     sort_by = 'created_at',
     order = 'desc',
     page = 1,
     limit = 12,
     search,
+    exclude_id,
   } = params;
 
   const ascending = order === 'asc';
@@ -89,6 +93,10 @@ export async function getPublicProducts(params: GetPublicProductsParams = {}) {
     .order(sort_by, { ascending })
     .range(from, to);
 
+  if (category_id) {
+    query = query.eq('category_id', category_id);
+  }
+
   if (category_slug) {
     const safeSlug = category_slug.replace(/[^a-z0-9-]/g, '');
     if (safeSlug) {
@@ -100,6 +108,10 @@ export async function getPublicProducts(params: GetPublicProductsParams = {}) {
 
   if (search) {
     query = query.ilike('product_translations.name', `%${search}%`);
+  }
+
+  if (exclude_id) {
+    query = query.neq('id', exclude_id);
   }
 
   const { data, error, count } = await query;
@@ -114,4 +126,39 @@ export async function getPublicProducts(params: GetPublicProductsParams = {}) {
       total_pages: count ? Math.ceil(count / limitNum) : 0,
     },
   };
+}
+
+export async function getProductBySlug(slug: string): Promise<ProductItem | null> {
+  const { data: translation, error: translationError } = await supabase
+    .from('product_translations')
+    .select('product_id')
+    .eq('slug', slug)
+    .maybeSingle();
+
+  if (translationError) throw translationError;
+  if (!translation) return null;
+
+  const { data, error } = await supabase
+    .from('products')
+    .select(
+      `
+        id,
+        price,
+        image_urls,
+        category_id,
+        is_active,
+        created_at,
+        updated_at,
+        category:categories(id, name),
+        product_translations(locale, name, description, slug)
+      `,
+    )
+    .eq('id', translation.product_id)
+    .eq('is_active', true)
+    .maybeSingle();
+
+  if (error) throw error;
+  if (!data) return null;
+
+  return mapProductRow(data as unknown as ProductRow);
 }

@@ -2,11 +2,9 @@
 
 import { ShoppingCart } from 'lucide-react';
 import Link from 'next/link';
-import { useMemo } from 'react';
 
 import { ProductGallery } from '@/app/(public)/shop/[slug]/_components/ProductGallery';
 import { ProductCard } from '@/app/(public)/shop/_components/ProductCard';
-import { formatPrice, PRODUCTS, type Product } from '@/app/(public)/shop/_lib/products';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -16,24 +14,18 @@ import {
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
 import { useI18n } from '@/context/I18nContext';
-
-const RELATED_PRODUCTS_LIMIT = 4;
+import { formatPrice } from '@/lib/utils';
+import type { ProductItem } from '@/types';
 
 interface ProductDetailViewProps {
-  product: Product;
+  product: ProductItem;
+  relatedProducts: ProductItem[];
 }
 
-export function ProductDetailView({ product }: ProductDetailViewProps) {
-  const { t } = useI18n();
-  const categoryLabel = t(`homepage.categoryGrid.categories.${product.category}.title`);
-
-  const relatedProducts = useMemo(
-    () =>
-      PRODUCTS.filter(
-        (candidate) => candidate.category === product.category && candidate.id !== product.id,
-      ).slice(0, RELATED_PRODUCTS_LIMIT),
-    [product.category, product.id],
-  );
+export function ProductDetailView({ product, relatedProducts }: ProductDetailViewProps) {
+  const { t, locale } = useI18n();
+  const categoryLabel = product.category?.name[locale] ?? '';
+  const images = product.image_urls.length > 0 ? product.image_urls : ['/images/logo.png'];
 
   return (
     <div className="mx-auto max-w-7xl px-4 pt-24 pb-16 md:px-8 md:pt-28">
@@ -48,31 +40,33 @@ export function ProductDetailView({ product }: ProductDetailViewProps) {
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>{product.name}</BreadcrumbPage>
+            <BreadcrumbPage>{product.name[locale]}</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
 
       <div className="mt-6 grid gap-10 lg:grid-cols-2 lg:gap-14">
         <ProductGallery
-          images={product.images}
-          productName={product.name}
+          images={images}
+          productName={product.name[locale]}
           previousLabel={t('shopPage.pagination.previous')}
           nextLabel={t('shopPage.pagination.next')}
         />
 
         <div className="flex flex-col">
-          <span className="bg-primary w-fit rounded-md px-2.5 py-1 text-[11px] font-semibold tracking-wide text-white uppercase">
-            {categoryLabel}
-          </span>
+          {categoryLabel && (
+            <span className="bg-primary w-fit rounded-md px-2.5 py-1 text-[11px] font-semibold tracking-wide text-white uppercase">
+              {categoryLabel}
+            </span>
+          )}
 
           <h1 className="font-heading mt-4 text-2xl font-bold text-gray-900 sm:text-3xl">
-            {product.name}
+            {product.name[locale]}
           </h1>
 
           <p className="text-primary mt-3 text-2xl font-bold">{formatPrice(product.price)}</p>
 
-          <p className="mt-5 leading-relaxed text-gray-600">{product.description}</p>
+          <p className="mt-5 leading-relaxed text-gray-600">{product.description[locale]}</p>
 
           <button
             type="button"
@@ -98,11 +92,11 @@ export function ProductDetailView({ product }: ProductDetailViewProps) {
             {relatedProducts.map((relatedProduct) => (
               <ProductCard
                 key={relatedProduct.id}
-                href={`/shop/${relatedProduct.id}`}
-                image={relatedProduct.image}
-                name={relatedProduct.name}
+                href={`/shop/${relatedProduct.slug[locale]}`}
+                image={relatedProduct.image_urls[0] ?? '/images/logo.png'}
+                name={relatedProduct.name[locale]}
                 price={relatedProduct.price}
-                categoryLabel={categoryLabel}
+                categoryLabel={relatedProduct.category?.name[locale] ?? ''}
                 addToCartLabel={t('shopPage.addToCart')}
               />
             ))}

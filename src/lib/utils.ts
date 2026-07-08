@@ -29,6 +29,10 @@ export function formatToSlug(value: string): string {
     .replace(/^-|-$/g, '');
 }
 
+export function formatPrice(price: number): string {
+  return `${price.toLocaleString('vi-VN')}₫`;
+}
+
 export function getSearchParams(req: NextRequest) {
   const params = req.nextUrl.searchParams;
 

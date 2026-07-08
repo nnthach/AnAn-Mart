@@ -2,7 +2,7 @@ import { ShoppingCart } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { formatPrice } from '@/app/(public)/shop/_lib/products';
+import { formatPrice } from '@/lib/utils';
 
 interface ProductCardProps {
   href: string;

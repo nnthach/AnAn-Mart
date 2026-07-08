@@ -2,6 +2,7 @@
 
 import { Headset, MapPin, ShieldCheck, ShoppingBag, Truck } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
 import { useI18n } from '@/context/I18nContext';
@@ -45,10 +46,12 @@ export function HeroSection() {
         </p>
 
         <div className="mt-7 flex flex-wrap justify-center gap-3">
-          <Button size="lg" className="gap-2 rounded-full px-6">
-            <ShoppingBag className="size-4" />
-            {t('homepage.hero.shopNow')}
-          </Button>
+          <Link href={'/shop'}>
+            <Button size="lg" className="gap-2 rounded-full px-6">
+              <ShoppingBag className="size-4" />
+              {t('homepage.hero.shopNow')}
+            </Button>
+          </Link>
           <Button
             size="lg"
             variant="outline"

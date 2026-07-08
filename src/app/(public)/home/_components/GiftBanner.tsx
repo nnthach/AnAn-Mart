@@ -1,6 +1,7 @@
 'use client';
 
 import { ChevronRight, Gift } from 'lucide-react';
+import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
 import { useI18n } from '@/context/I18nContext';
@@ -19,19 +20,19 @@ export function GiftBanner() {
             <h2 className="font-heading text-xl font-bold text-white sm:text-2xl">
               {t('homepage.giftBanner.title')}
             </h2>
-            <p className="mt-1 text-sm text-white/85">
-              {t('homepage.giftBanner.description')}
-            </p>
+            <p className="mt-1 text-sm text-white/85">{t('homepage.giftBanner.description')}</p>
           </div>
         </div>
 
-        <Button
-          variant="outline"
-          className="hover:text-primary relative gap-1.5 rounded-full border-white bg-transparent px-5 text-white hover:bg-white"
-        >
-          {t('homepage.giftBanner.cta')}
-          <ChevronRight className="size-4" />
-        </Button>
+        <Link href={'/shop'}>
+          <Button
+            variant="outline"
+            className="hover:text-primary relative gap-1.5 rounded-full border-white bg-transparent px-5 text-white hover:bg-white"
+          >
+            {t('homepage.giftBanner.cta')}
+            <ChevronRight className="size-4" />
+          </Button>
+        </Link>
       </div>
     </section>
   );

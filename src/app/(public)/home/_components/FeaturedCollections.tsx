@@ -1,15 +1,16 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
 import { useI18n } from '@/context/I18nContext';
 
 const COLLECTIONS = [
-  { key: 'wine', image: '/images/feature/wine.jpg' },
-  { key: 'whisky', image: '/images/feature/whisky.jpg' },
-  { key: 'gourmetSnacks', image: '/images/feature/snack.jpg' },
-  { key: 'coffee', image: '/images/feature/coffee.jpg' },
+  { key: 'wine', image: '/images/feature/wine.jpg', categorySlug: 'wine' },
+  { key: 'whisky', image: '/images/feature/whisky.jpg', categorySlug: 'whisky' },
+  { key: 'gourmetSnacks', image: '/images/feature/snack.jpg', categorySlug: 'snacks' },
+  { key: 'coffee', image: '/images/feature/coffee.jpg', categorySlug: 'coffee' },
 ] as const;
 
 export function FeaturedCollections() {
@@ -26,7 +27,7 @@ export function FeaturedCollections() {
       </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {COLLECTIONS.map(({ key, image }) => {
+        {COLLECTIONS.map(({ key, image, categorySlug }) => {
           const title = t(`homepage.featuredCollections.collections.${key}.title`);
 
           return (
@@ -50,7 +51,11 @@ export function FeaturedCollections() {
                 <p className="mt-1 max-w-[18ch] text-xs text-white/75">
                   {t(`homepage.featuredCollections.collections.${key}.description`)}
                 </p>
-                <Button size="sm" className="mt-4 w-fit rounded-full px-4">
+                <Button
+                  size="sm"
+                  className="mt-4 w-fit rounded-full px-4"
+                  render={<Link href={`/shop?category=${categorySlug}`} />}
+                >
                   {t('homepage.featuredCollections.shopNow')}
                 </Button>
               </div>
