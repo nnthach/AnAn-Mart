@@ -38,10 +38,14 @@ export function ShopToolbar({ categories, totalCount }: ShopToolbarProps) {
   const debouncedQuery = useDebounce(searchQuery, 300);
   const isFirstRender = useRef(true);
 
+  // dùng useRef để giữ giá trị mới nhất của searchParams
+  const searchParamsRef = useRef(searchParams);
+  searchParamsRef.current = searchParams;
+
   // run param
   const pushParams = useCallback(
     (updates: Record<string, string | undefined>) => {
-      const params = new URLSearchParams(searchParams.toString());
+      const params = new URLSearchParams(searchParamsRef.current.toString());
       Object.entries(updates).forEach(([key, value]) => {
         if (value) params.set(key, value);
         else params.delete(key);
@@ -49,7 +53,7 @@ export function ShopToolbar({ categories, totalCount }: ShopToolbarProps) {
       params.set('page', '1');
       router.push(`?${params.toString()}`);
     },
-    [searchParams, router],
+    [router],
   );
 
   useEffect(() => {
