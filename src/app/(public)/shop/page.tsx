@@ -5,6 +5,15 @@ import Header from '@/components/layout/Header';
 import { getPublicCategories } from '@/lib/db/category-public';
 import { getPublicProducts } from '@/lib/db/product-public';
 
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Shop',
+  description:
+    'Mua sắm rượu vang nhập khẩu, whisky, bia thủ công, cà phê, đồ ăn vặt và nhu yếu phẩm hàng ngày tại An An Mart, Hội An.',
+  alternates: { canonical: '/shop' },
+};
+
 const DEFAULT_LIMIT = 12;
 
 interface ShopPageProps {
