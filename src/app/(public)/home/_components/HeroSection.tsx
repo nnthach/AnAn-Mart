@@ -21,7 +21,7 @@ export function HeroSection() {
 
   return (
     <section className="relative flex min-h-screen items-center overflow-hidden">
-      <div className="animate-imageFade absolute inset-0">
+      <div className="animate-imageFade absolute inset-0 h-full w-full">
         <Image
           src="/images/banner2.png"
           alt="An An Mart — premium wines, spirits and Hoi An gifts"
@@ -30,8 +30,8 @@ export function HeroSection() {
           sizes="100vw"
           className="object-cover object-center"
         />
-        <div className="absolute inset-0 bg-linear-to-r from-black/95 via-black/70 to-transparent" />
       </div>
+      <div className="absolute inset-0 h-full w-full bg-linear-to-r from-black/95 via-black/70 to-black/30" />
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-4 py-24 md:px-8">
         <div

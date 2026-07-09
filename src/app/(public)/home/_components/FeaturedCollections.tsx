@@ -37,7 +37,7 @@ export function FeaturedCollections() {
             <div
               key={key}
               className={cn(
-                'relative flex aspect-4/5 items-end overflow-hidden rounded-2xl sm:aspect-4/5',
+                'group ring-border/0 hover:ring-primary/50 relative flex aspect-4/5 items-end overflow-hidden rounded-2xl ring-2 transition-shadow duration-500 hover:shadow-xl hover:shadow-black/30 sm:aspect-4/5',
                 !inView && 'opacity-0',
                 inView && 'animate-scaleIn',
               )}
@@ -48,7 +48,7 @@ export function FeaturedCollections() {
                 alt={title}
                 fill
                 sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-                className="object-cover"
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-linear-to-r from-black/85 via-black/40 to-transparent" />
 
