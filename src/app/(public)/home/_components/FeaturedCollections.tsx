@@ -29,7 +29,7 @@ export function FeaturedCollections() {
         <span className="via-primary h-px w-10 bg-linear-to-r from-transparent to-transparent" />
       </div>
 
-      <div ref={ref} className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div ref={ref} className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {COLLECTIONS.map(({ key, image, categorySlug }, index) => {
           const title = t(`homepage.featuredCollections.collections.${key}.title`);
 
@@ -37,7 +37,7 @@ export function FeaturedCollections() {
             <div
               key={key}
               className={cn(
-                'relative flex aspect-3/2 items-end overflow-hidden rounded-2xl',
+                'relative flex aspect-4/5 items-end overflow-hidden rounded-2xl sm:aspect-4/5',
                 !inView && 'opacity-0',
                 inView && 'animate-scaleIn',
               )}
@@ -52,15 +52,15 @@ export function FeaturedCollections() {
               />
               <div className="absolute inset-0 bg-linear-to-r from-black/85 via-black/40 to-transparent" />
 
-              <div className="relative p-5">
-                <h3 className="font-heading text-xl font-bold tracking-wide text-white uppercase">
+              <div className="relative p-6">
+                <h3 className="font-heading text-2xl font-bold tracking-wide text-white uppercase">
                   {title}
                 </h3>
-                <p className="mt-1 max-w-[18ch] text-xs text-white/75">
+                <p className="mt-2 max-w-[20ch] text-sm text-white/75">
                   {t(`homepage.featuredCollections.collections.${key}.description`)}
                 </p>
                 <Link href={`/shop?category=${categorySlug}`}>
-                  <Button size="sm" className="mt-4 w-fit rounded-full px-4">
+                  <Button size="default" className="mt-5 w-fit rounded-full px-5">
                     {t('homepage.featuredCollections.shopNow')}
                   </Button>
                 </Link>

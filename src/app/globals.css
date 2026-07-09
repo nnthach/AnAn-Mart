@@ -233,6 +233,27 @@
   animation: scaleIn 0.5s ease-out both;
 }
 
+@keyframes circuitFlow {
+  0% {
+    left: -15%;
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    left: 115%;
+    opacity: 0;
+  }
+}
+
+.animate-circuitFlow {
+  animation: circuitFlow 3.2s ease-in-out infinite;
+}
+
 /* scrollbar */
 .custom-scrollbar {
   scrollbar-width: thin;

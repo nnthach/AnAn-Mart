@@ -51,9 +51,11 @@ export const translations = {
     },
     homepage: {
       hero: {
-        eyebrow: 'Your Premium',
-        titleHighlight: 'Grocery & Wine',
-        subtitle: 'Destination in Hoi An',
+        eyebrow: 'Premium Grocery • Wine • Specialty Foods',
+        titleLine1: 'Premium Grocery',
+        titleLine2Prefix: 'Specialty',
+        titleHighlight: 'Hoi An',
+        titleLine3: '& Imported Wine',
         description:
           'Discover imported wines, premium spirits, gourmet snacks, coffee, souvenirs, and daily essentials — all in one trusted local store.',
         shopNow: 'Shop Now',
@@ -526,9 +528,11 @@ export const translations = {
     },
     homepage: {
       hero: {
-        eyebrow: 'Điểm Đến Cao Cấp Về',
-        titleHighlight: 'Tạp Hóa & Rượu Vang',
-        subtitle: 'Tại Hội An',
+        eyebrow: 'Tạp Hóa Cao Cấp • Rượu Vang • Đặc Sản',
+        titleLine1: 'Tạp Hóa Cao Cấp',
+        titleLine2Prefix: 'Đặc Sản',
+        titleHighlight: 'Hội An',
+        titleLine3: '& Rượu Vang Nhập Khẩu',
         description:
           'Khám phá rượu vang nhập khẩu, rượu mạnh cao cấp, đồ ăn vặt cao cấp, cà phê, quà lưu niệm và các nhu yếu phẩm hàng ngày — tất cả trong một cửa hàng địa phương đáng tin cậy.',
         shopNow: 'Mua Ngay',
@@ -567,14 +571,14 @@ export const translations = {
         collections: {
           wine: {
             title: 'Rượu Vang',
-            description: 'Bộ sưu tập rượu vang nhập khẩu cao cấp được tuyển chọn',
+            description: 'Bộ sưu tập rượu vang nhập khẩu cao cấp',
           },
           whisky: {
             title: 'Rượu Whisky',
             description: 'Thương hiệu nổi tiếng thế giới dành cho người sành rượu',
           },
           gourmetSnacks: {
-            title: 'Đồ Ăn Vặt Cao Cấp',
+            title: 'Ăn Vặt Cao Cấp',
             description: 'Món ngon từ khắp nơi trên thế giới',
           },
           coffee: { title: 'Cà Phê', description: 'Cà phê chất lượng để khởi đầu ngày mới' },
