@@ -10,7 +10,7 @@ export default function AdminLayoutClient({ children }: { children: React.ReactN
         <AdminSidebar />
         <SidebarInset>
           <AdminHeader />
-          <main className="bg-muted/30 flex-1 p-6">{children}</main>
+          <main className="bg-muted/50 flex-1 p-6">{children}</main>
         </SidebarInset>
       </SidebarProvider>
     </TooltipProvider>

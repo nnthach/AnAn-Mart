@@ -24,7 +24,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Separator } from '@/components/ui/separator';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import { useAuth } from '@/context/AuthContext';
 import { useI18n } from '@/context/I18nContext';
@@ -62,10 +61,8 @@ export function AdminHeader() {
   const { user, logout } = useAuth();
 
   return (
-    <header className="border-border bg-background sticky top-0 z-30 flex h-14 items-center gap-2 border-b px-6 backdrop-blur-sm">
+    <header className="bg-background sticky top-0 z-30 flex h-14 items-center gap-2 px-6 shadow-[0_1px_3px_0_rgb(0_0_0/0.06),0_1px_2px_-1px_rgb(0_0_0/0.04)] backdrop-blur-sm">
       <SidebarTrigger className="text-muted-foreground hover:text-foreground -ml-1" />
-
-      <Separator orientation="vertical" className="mr-2 h-4" />
 
       <Breadcrumb className="flex-1">
         <BreadcrumbList>

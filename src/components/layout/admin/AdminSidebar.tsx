@@ -70,8 +70,7 @@ function NavGroup({
                 tooltip={title}
                 className={cn(
                   'transition-colors',
-                  isActive &&
-                    'bg-primary/15 text-primary hover:bg-primary/20 hover:text-primary font-medium',
+                  'data-active:bg-primary/20 data-active:text-primary data-active:hover:bg-primary/40 data-active:hover:text-primary',
                 )}
                 render={<Link href={item.href} />}
               >
@@ -94,8 +93,11 @@ export function AdminSidebar() {
   const { user, logout } = useAuth();
 
   return (
-    <Sidebar collapsible="icon">
-      <SidebarHeader className="border-sidebar-border border-b pb-3">
+    <Sidebar
+      collapsible="icon"
+      className="shadow-[0_1px_3px_0_rgb(0_0_0/0.06),0_1px_2px_-1px_rgb(0_0_0/0.04)] group-data-[side=left]:border-r-0"
+    >
+      <SidebarHeader className="border-sidebar-border pb-3">
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton
