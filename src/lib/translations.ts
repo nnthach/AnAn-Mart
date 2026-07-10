@@ -424,7 +424,7 @@ export const translations = {
         },
       },
       modal: {
-        image: 'Images',
+        image: 'Images ( max 5 )',
         addImage: 'Add image',
         loading: 'Loading...',
         cancel: 'Cancel',
@@ -909,7 +909,7 @@ export const translations = {
         },
       },
       modal: {
-        image: 'Hình Ảnh',
+        image: 'Hình Ảnh ( tối đa 5 hình )',
         addImage: 'Thêm hình',
         loading: 'Đang tải...',
         cancel: 'Hủy',

@@ -1,9 +1,10 @@
 'use client';
 
-import { ClipboardList } from 'lucide-react';
+import { ClipboardList, Eye } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
 import type { badgeVariants } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import {
   Table,
   TableBody,
@@ -51,6 +52,7 @@ export function OrderTable({ orders }: OrderTableProps) {
           <TableHead>{t('admin.table.columns.status')}</TableHead>
           <TableHead>{t('admin.ordersPage.table.columns.payment')}</TableHead>
           <TableHead>{t('admin.table.columns.createdAt')}</TableHead>
+          <TableHead className="text-right">{t('admin.table.columns.actions')}</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -85,6 +87,17 @@ export function OrderTable({ orders }: OrderTableProps) {
               </TableCell>
               <TableCell className="text-muted-foreground text-sm">
                 {new Date(order.createdAt).toLocaleDateString('vi-VN')}
+              </TableCell>
+              <TableCell>
+                <div className="flex items-center justify-end gap-2">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-8 w-8 text-blue-400 hover:bg-blue-400/10 hover:text-blue-400"
+                  >
+                    <Eye className="h-3.5 w-3.5" />
+                  </Button>
+                </div>
               </TableCell>
             </TableRow>
           ))

@@ -2,6 +2,7 @@
 
 import { LayoutGrid, Trash2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -29,6 +30,7 @@ export default function CategoryTable({ categories }: CategoryTableProps) {
 
   const handleDelete = async (id: string) => {
     await deleteCategoryAction(id);
+    toast.success(locale === 'vi' ? 'Xóa danh mục thành công!' : 'Category deleted successfully!');
     router.refresh();
   };
 

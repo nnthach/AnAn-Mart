@@ -40,6 +40,8 @@ interface ProductImage {
   file?: File;
 }
 
+const MAX_IMAGES = 5;
+
 interface CreateProductModalProps {
   onCreated?: () => void;
 }
@@ -90,13 +92,15 @@ export default function CreateProductModal({ onCreated }: CreateProductModalProp
     const files = Array.from(event.target.files ?? []);
     if (files.length === 0) return;
 
-    const newImages = files.map((file) => ({
-      id: crypto.randomUUID(),
-      url: URL.createObjectURL(file),
-      file,
-    }));
-
-    setImages((prev) => [...prev, ...newImages]);
+    setImages((prev) => {
+      const remainingSlots = MAX_IMAGES - prev.length;
+      const newImages = files.slice(0, remainingSlots).map((file) => ({
+        id: crypto.randomUUID(),
+        url: URL.createObjectURL(file),
+        file,
+      }));
+      return [...prev, ...newImages];
+    });
     event.target.value = '';
   };
 
@@ -191,14 +195,16 @@ export default function CreateProductModal({ onCreated }: CreateProductModalProp
                   </div>
                 ))}
 
-                <button
-                  type="button"
-                  onClick={handleImageClick}
-                  className="border-muted-foreground/40 bg-muted/30 text-muted-foreground hover:border-primary/60 hover:bg-muted/50 flex aspect-square flex-col items-center justify-center gap-1 rounded-md border-2 border-dashed transition-colors"
-                >
-                  <ImagePlus className="h-5 w-5" />
-                  <span className="text-xs">{t('admin.modal.addImage')}</span>
-                </button>
+                {images.length < MAX_IMAGES && (
+                  <button
+                    type="button"
+                    onClick={handleImageClick}
+                    className="border-muted-foreground/40 bg-muted/30 text-muted-foreground hover:border-primary/60 hover:bg-muted/50 flex aspect-square flex-col items-center justify-center gap-1 rounded-md border-2 border-dashed transition-colors"
+                  >
+                    <ImagePlus className="h-5 w-5" />
+                    <span className="text-xs">{t('admin.modal.addImage')}</span>
+                  </button>
+                )}
               </div>
             </div>
 

@@ -31,10 +31,12 @@ export default function ProductTable({ products }: ProductTableProps) {
 
   const handleDelete = async (id: string) => {
     const result = await deleteProductAction(id);
+
     if (!result.success) {
       toast.error(t('admin.productsPage.deleteFailed'));
       return;
     }
+    toast.success(locale === 'vi' ? 'Xóa sản phẩm thành công!' : 'Product deleted successfully!');
     router.refresh();
   };
 

@@ -10,7 +10,6 @@ import InputFormField from '@/components/features/InputFormField';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogFooter,
   DialogHeader,
@@ -128,11 +127,6 @@ export default function CreateCategoryModal({ onCreated }: CreateCategoryModalPr
             />
           </div>
           <DialogFooter className="mt-4 gap-2">
-            <DialogClose
-              render={<Button type="button" variant="outline" disabled={isSubmitting} />}
-            >
-              {t('admin.modal.cancel')}
-            </DialogClose>
             <Button type="submit" disabled={isSubmitting} className="min-w-24">
               {isSubmitting ? (
                 <Loader2 className="h-4 w-4 animate-spin" />
