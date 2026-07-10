@@ -1,5 +1,6 @@
 import { CategoryGrid } from '@/app/(public)/home/_components/CategoryGrid';
 import { FeaturedCollections } from '@/app/(public)/home/_components/FeaturedCollections';
+import { FeaturedProducts } from '@/app/(public)/home/_components/FeaturedProducts';
 import { GiftBanner } from '@/app/(public)/home/_components/GiftBanner';
 import { HeroSection } from '@/app/(public)/home/_components/HeroSection';
 import ScrollToTopButton from '@/app/(public)/home/_components/ScrollToTopButton';
@@ -15,6 +16,7 @@ export default function HomePage() {
       <main className="flex-1">
         <HeroSection />
         <CategoryGrid />
+        <FeaturedProducts />
         <FeaturedCollections />
         <GiftBanner />
         <WhyChooseUs />

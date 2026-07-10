@@ -85,6 +85,9 @@ export const translations = {
           },
         },
       },
+      featuredProducts: {
+        heading: 'Featured Products',
+      },
       featuredCollections: {
         heading: 'Featured Collections',
         shopNow: 'Shop Now',
@@ -564,6 +567,9 @@ export const translations = {
             subtitle: 'Chống Nắng, Chăm Sóc Cá Nhân, Nhu Yếu Phẩm',
           },
         },
+      },
+      featuredProducts: {
+        heading: 'Sản Phẩm Nổi Bật',
       },
       featuredCollections: {
         heading: 'Bộ Sưu Tập Nổi Bật',
