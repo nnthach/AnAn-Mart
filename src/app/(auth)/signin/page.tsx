@@ -155,13 +155,6 @@ export default function SignInPage() {
               )}
             </Button>
           </form>
-
-          <p className="text-muted-foreground mt-6 text-center text-sm">
-            {t('authPage.signinPage.noAccount')}{' '}
-            <Link href="/signup" className="text-primary font-semibold hover:underline">
-              {t('authPage.signinPage.signUpLink')}
-            </Link>
-          </p>
         </div>
       </div>
     </main>

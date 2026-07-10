@@ -12,7 +12,6 @@ import {
   STORE_PHONE,
 } from '@/config/constants';
 import { env } from '@/config/env';
-import { AuthProviderWrapper } from '@/context/AuthProviderWrapper';
 import { I18nProvider } from '@/context/I18nContext';
 import { cn } from '@/lib/utils';
 
@@ -94,9 +93,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
         />
-        <I18nProvider>
-          <AuthProviderWrapper>{children}</AuthProviderWrapper>
-        </I18nProvider>
+        <I18nProvider>{children}</I18nProvider>
         <Toaster position="top-right" reverseOrder={false} />
       </body>
     </html>

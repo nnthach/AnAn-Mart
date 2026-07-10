@@ -69,3 +69,10 @@ export interface UserItem {
   role: UserRoleEnum;
   status: UserStatusEnum;
 }
+
+export interface AuthUser extends UserItem {
+  staff?: {
+    id: string;
+    is_active: boolean;
+  } | null;
+}

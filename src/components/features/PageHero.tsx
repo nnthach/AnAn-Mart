@@ -29,12 +29,19 @@ export function PageHero({
 }: PageHeroProps) {
   return (
     <section className="relative flex items-end overflow-hidden pt-28 pb-10 md:pt-32 md:pb-12">
-      <Image src={image} alt={imageAlt} fill priority sizes="100vw" className="object-cover object-center" />
+      <Image
+        src={image}
+        alt={imageAlt}
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover object-center"
+      />
       <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/70 to-black/40" />
 
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 md:px-8">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 text-center md:px-8">
         <Breadcrumb>
-          <BreadcrumbList className="text-white/60">
+          <BreadcrumbList className="justify-center text-white/60">
             <BreadcrumbItem>
               <BreadcrumbLink render={<Link href="/" className="hover:text-white" />}>
                 {homeLabel}
@@ -50,7 +57,7 @@ export function PageHero({
         <h1 className="font-heading mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
           {title}
         </h1>
-        <p className="mt-2 max-w-lg text-sm text-white/70 sm:text-base">{description}</p>
+        <p className="mt-2 text-center text-sm text-white/70 sm:text-base">{description}</p>
       </div>
     </section>
   );

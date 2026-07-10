@@ -5,16 +5,9 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
 import { signOutAction } from '@/server/actions/auth';
-import type { UserItem } from '@/types';
+import type { AuthUser } from '@/types';
 
 import { useI18n } from './I18nContext';
-
-export interface AuthUser extends UserItem {
-  staff?: {
-    id: string;
-    is_active: boolean;
-  } | null;
-}
 
 interface AuthContextType {
   user: AuthUser | null;

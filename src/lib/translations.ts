@@ -923,7 +923,7 @@ export const translations = {
     authPage: {
       signinPage: {
         title: 'Chào Mừng Trở Lại',
-        subtitle: 'Đăng nhập để tiếp tục mua sắm cùng An An Mart',
+        subtitle: 'Đăng nhập để truy cập vào An An Mart',
         tagline:
           'Tạp hóa tươi ngon, rượu vang thượng hạng và nhu yếu phẩm hàng ngày — giao tận nơi khắp Hội An.',
         emailLabel: 'Email',

@@ -25,7 +25,7 @@ export function CategoryGrid() {
   const { ref, inView } = useInView<HTMLDivElement>();
 
   return (
-    <section className="mx-auto max-w-7xl px-4 pt-12 md:px-8">
+    <section className="w-full pt-12">
       <div className="mb-10 flex items-center justify-center gap-4">
         <span className="via-primary h-px w-10 bg-linear-to-r from-transparent to-transparent" />
         <h2 className="text-primary text-center text-xs font-semibold tracking-[0.2em] uppercase">
