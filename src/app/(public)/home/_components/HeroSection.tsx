@@ -71,6 +71,9 @@ export function HeroSection() {
               size="lg"
               variant="outline"
               className="border-primary text-primary hover:bg-accent gap-2 rounded-full bg-white px-6"
+              onClick={() =>
+                document.getElementById('store-gallery')?.scrollIntoView({ behavior: 'smooth' })
+              }
             >
               <MapPin className="size-4" />
               {t('homepage.hero.visitStore')}

@@ -7,16 +7,22 @@ import { useState } from 'react';
 import LocationMap from '@/components/features/LocationMap';
 import { useI18n } from '@/context/I18nContext';
 
-const CONTACT_INFO = [
-  { icon: MapPinIcon, label: '191 Lý Thường Kiệt,\nHội An, Quảng Nam, Vietnam' },
-  { icon: Clock, label: '8:00 AM - 12:30 AM' },
-  { icon: Phone, label: '+84 90 123 45 67' },
-  { icon: Mail, label: 'info@ananmarthoian.com' },
-] as const;
-
 export default function ContactSection() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const [isSubmitted, setIsSubmitted] = useState(false);
+  
+  const CONTACT_INFO = [
+    {
+      icon: MapPinIcon,
+      label:
+        locale === 'vi'
+          ? '191 Lý Thường Kiệt, Phường Hội An Tây, Thành phố Đà Nẵng, Việt Nam'
+          : '191 Ly Thuong Kiet, Phuong Hoi An Tay, Thanh pho Da Nang, Viet Nam',
+    },
+    { icon: Clock, label: '8:00 AM - 12:30 AM' },
+    { icon: Phone, label: '+84 90 123 45 67' },
+    { icon: Mail, label: 'info@ananmarthoian.com' },
+  ] as const;
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-14 md:px-8">

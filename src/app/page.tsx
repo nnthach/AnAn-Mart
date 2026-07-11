@@ -18,9 +18,9 @@ export default function HomePage() {
         <CategoryGrid />
         <FeaturedProducts />
         <FeaturedCollections />
-        <GiftBanner />
         <WhyChooseUs />
         <StoreGallery />
+        <GiftBanner />
       </main>
       <Footer />
       <ScrollToTopButton />

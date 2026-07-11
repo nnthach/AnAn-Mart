@@ -45,7 +45,7 @@ export function CategoryGrid() {
             return (
               <div
                 key={`${key}-${index}`}
-                className="group/card relative w-40 shrink-0 sm:w-44 lg:w-48"
+                className="group/card relative w-52 shrink-0 sm:w-56 lg:w-60"
               >
                 <div className="ring-border relative aspect-3/4 overflow-hidden rounded-2xl shadow-sm ring-1">
                   <Image
@@ -64,7 +64,7 @@ export function CategoryGrid() {
                     <h3 className="text-xs font-semibold tracking-wide text-white uppercase sm:text-sm">
                       {title}
                     </h3>
-                    <p className="max-h-0 overflow-hidden text-[11px] leading-snug text-white/80 opacity-0 transition-all duration-500 group-hover/card:mt-0.5 group-hover/card:max-h-12 group-hover/card:opacity-100">
+                    <p className="max-h-0 overflow-hidden text-[12px] leading-snug text-white/80 opacity-0 transition-all duration-500 group-hover/card:mt-0.5 group-hover/card:max-h-12 group-hover/card:opacity-100">
                       {t(`homepage.categoryGrid.categories.${key}.subtitle`)}
                     </p>
                   </div>

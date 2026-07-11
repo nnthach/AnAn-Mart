@@ -7,7 +7,6 @@ import { useEffect, useRef } from 'react';
 import { useI18n } from '@/context/I18nContext';
 
 const STORE_NAME = 'An An Mart';
-const STORE_ADDRESS_LINES = ['191 Lý Thường Kiệt,', 'Hội An, Quảng Nam, Vietnam'];
 const STORE_COORDINATES: [number, number] = [
   Number(process.env.NEXT_PUBLIC_STORE_LNG),
   Number(process.env.NEXT_PUBLIC_STORE_LAT),
@@ -17,7 +16,7 @@ const GOOGLE_MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${STORE
 const MAPBOX_ACCESS_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
 
 export default function LocationMap() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const mapContainer = useRef<HTMLDivElement | null>(null);
   const map = useRef<mapboxgl.Map | null>(null);
 
@@ -58,11 +57,11 @@ export default function LocationMap() {
       <div className="absolute top-4 left-4 max-w-56 rounded-xl bg-white p-4 shadow-lg">
         <p className="text-sm font-bold text-gray-900">{STORE_NAME}</p>
         <p className="mt-1 text-sm leading-snug text-gray-600">
-          {STORE_ADDRESS_LINES.map((line) => (
-            <span key={line} className="block">
-              {line}
-            </span>
-          ))}
+          <span className="block">
+            {locale === 'vi'
+              ? '191 Lý Thường Kiệt, Phường Hội An Tây, Thành phố Đà Nẵng, Việt Nam'
+              : '191 Ly Thuong Kiet, Phuong Hoi An Tay, Thanh pho Da Nang, Viet Nam'}
+          </span>
         </p>
         <a
           href={GOOGLE_MAPS_URL}

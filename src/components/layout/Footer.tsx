@@ -44,7 +44,7 @@ const SOCIAL_LINKS = [
 ];
 
 export default function Footer() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
 
   return (
     <footer className="border-border border-t bg-gray-50">
@@ -61,7 +61,9 @@ export default function Footer() {
               />
             </span>
           </div>
-          <p className="mt-4 max-w-xs text-sm leading-relaxed text-gray-600">{t('footer.tagline')}</p>
+          <p className="mt-4 max-w-xs text-sm leading-relaxed text-gray-600">
+            {t('footer.tagline')}
+          </p>
           <div className="mt-4 flex items-center gap-3">
             {SOCIAL_LINKS.map(({ label, href, path }) => (
               <a
@@ -87,7 +89,9 @@ export default function Footer() {
           <ul className="mt-4 space-y-3 text-sm text-gray-600">
             <li className="flex items-start gap-2">
               <MapPin className="text-primary mt-0.5 size-4 shrink-0" />
-              191 Ly Thuong Kiet, Hoi An, Quang Nam, Vietnam
+              {locale === 'vi'
+                ? '191 Lý Thường Kiệt, Phường Hội An Tây, Thành phố Đà Nẵng, Việt Nam'
+                : '191 Ly Thuong Kiet, Phuong Hoi An Tay, Thanh pho Da Nang, Viet Nam'}
             </li>
             <li className="flex items-start gap-2">
               <Clock className="text-primary mt-0.5 size-4 shrink-0" />

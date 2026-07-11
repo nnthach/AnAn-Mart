@@ -9,18 +9,24 @@ import { useInView } from '@/hooks/useInView';
 import { cn } from '@/lib/utils';
 
 export function StoreGallery() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const { ref, inView } = useInView<HTMLDivElement>();
 
   const STORE_INFO = [
-    { icon: MapPin, label: '191 Lý Thường Kiệt,\nHội An, Quảng Nam, Vietnam' },
+    {
+      icon: MapPin,
+      label:
+        locale === 'vi'
+          ? '191 Lý Thường Kiệt, Phường Hội An Tây, Thành phố Đà Nẵng, Việt Nam'
+          : '191 Ly Thuong Kiet, Phuong Hoi An Tay, Thanh pho Da Nang, Viet Nam',
+    },
     { icon: Clock, label: `${t('homepage.storeGallery.openDaily')}\n8:00 AM - 12:30 AM` },
     { icon: Phone, label: '+84 90 123 45 67' },
     { icon: Mail, label: 'info@ananmarthoian.com' },
   ];
 
   return (
-    <section className="mx-auto max-w-7xl px-4 pb-12 md:px-8">
+    <section id="store-gallery" className="mx-auto max-w-7xl px-4 pb-12 md:px-8">
       <div ref={ref} className="grid lg:grid-cols-2">
         <div
           className={cn(

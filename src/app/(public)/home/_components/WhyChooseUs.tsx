@@ -20,7 +20,7 @@ export function WhyChooseUs() {
   const { ref, inView } = useInView<HTMLDivElement>();
 
   return (
-    <section className="mx-auto max-w-7xl px-4 py-12 md:px-8">
+    <section className="mx-auto max-w-7xl px-4 pb-12 md:px-8">
       <div className="border-border rounded-2xl border bg-white p-8 shadow-sm sm:p-14">
         <div className="mb-12 flex items-center justify-center gap-4">
           <span className="via-primary h-px w-10 bg-linear-to-r from-transparent to-transparent" />
